@@ -5,65 +5,48 @@
 
 @layer base {
   :root {
-    --background: 16 100% 98%;
-    --foreground: 16 40% 10%;
-
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
     --card: 0 0% 100%;
-    --card-foreground: 16 40% 10%;
-
+    --card-foreground: 222.2 84% 4.9%;
     --popover: 0 0% 100%;
-    --popover-foreground: 16 40% 10%;
-
-    --primary: 16 100% 50%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 16 30% 95%;
-    --secondary-foreground: 16 50% 30%;
-
-    --muted: 16 20% 90%;
-    --muted-foreground: 16 20% 40%;
-
-    --accent: 16 90% 60%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 16 30% 85%;
-    --input: 16 30% 85%;
-    --ring: 16 100% 50%;
-
-    --radius: 0.75rem;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.5rem;
   }
 
   .dark {
-    --background: 224 71% 4%;
-    --foreground: 16 30% 96%;
-
-    --card: 224 71% 8%;
-    --card-foreground: 16 30% 96%;
-
-    --popover: 224 71% 8%;
-    --popover-foreground: 16 30% 96%;
-
-    --primary: 16 100% 50%;
-    --primary-foreground: 0 0% 100%;
-
-    --secondary: 16 30% 20%;
-    --secondary-foreground: 16 30% 96%;
-
-    --muted: 16 20% 20%;
-    --muted-foreground: 16 20% 70%;
-
-    --accent: 16 90% 50%;
-    --accent-foreground: 0 0% 100%;
-
-    --destructive: 0 100% 50%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 16 30% 20%;
-    --input: 16 30% 20%;
-    --ring: 16 100% 50%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
   }
 }
 
@@ -71,102 +54,92 @@
   * {
     @apply border-border;
   }
-  
-  html {
-    @apply scroll-smooth;
-  }
-  
   body {
-    @apply bg-background text-foreground antialiased;
-    font-feature-settings: "ss01", "ss02", "cv01", "cv02", "cv03";
-  }
-
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-  }
-
-  h1 {
-    @apply text-4xl md:text-5xl lg:text-6xl;
-  }
-
-  h2 {
-    @apply text-3xl md:text-4xl lg:text-5xl;
-  }
-
-  h3 {
-    @apply text-2xl md:text-3xl;
-  }
-
-  h4 {
-    @apply text-xl md:text-2xl;
-  }
-
-  h5 {
-    @apply text-lg md:text-xl;
-  }
-
-  h6 {
-    @apply text-base md:text-lg;
+    @apply bg-background text-foreground;
   }
 }
 
-@layer components {
-  .hero-gradient {
-    @apply bg-gradient-to-br from-afs-orange to-afs-red;
-  }
-
-  .glass-card {
-    @apply backdrop-blur-lg bg-white/10 border border-white/20 shadow-xl;
-  }
-  
-  .afs-heading span {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red;
-  }
-  
-  .btn-primary {
-    @apply bg-gradient-to-r from-afs-orange to-afs-red text-white px-6 py-3 rounded-lg font-medium 
-    shadow-lg transition-all duration-300 hover:shadow-xl hover:scale-105 hover:from-afs-red hover:to-afs-orange;
-  }
-  
-  .btn-secondary {
-    @apply bg-white/10 backdrop-blur-md border border-white/20 text-white px-6 py-3 rounded-lg font-medium 
-    shadow-lg transition-all duration-300 hover:shadow-xl hover:bg-white/20;
-  }
-  
-  .card-hover {
-    @apply transition-transform duration-300 hover:scale-105;
-  }
-  
-  .section-padding {
-    @apply py-16 md:py-24;
-  }
+/* Custom AFS colors */
+:root {
+  --afs-dark: #121212;
+  --afs-dark-accent: #1e1e1e;
+  --afs-orange: #FF5722;
+  --afs-red: #F72119;
 }
 
-.video-container {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  overflow: hidden;
+.bg-afs-dark {
+  background-color: var(--afs-dark);
 }
 
-.video-bg {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  min-width: 100%;
-  min-height: 100%;
-  width: auto;
-  height: auto;
-  transform: translateX(-50%) translateY(-50%);
-  z-index: -1;
+.bg-afs-dark-accent {
+  background-color: var(--afs-dark-accent);
 }
 
-.video-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  z-index: 0;
+.text-afs-orange {
+  color: var(--afs-orange);
+}
+
+.bg-afs-orange {
+  background-color: var(--afs-orange);
+}
+
+.border-afs-orange {
+  border-color: var(--afs-orange);
+}
+
+.afs-heading {
+  letter-spacing: -0.5px;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red text-white font-semibold py-3 px-6 rounded-lg 
+  hover:from-afs-orange/90 hover:to-afs-red/90 transition-all shadow-lg hover:shadow-xl 
+  hover:translate-y-[-2px] active:translate-y-0 active:shadow-lg;
+}
+
+.btn-secondary {
+  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold py-3 px-6 rounded-lg 
+  hover:bg-white/15 transition-all;
+}
+
+/* Cards */
+.glass-card {
+  @apply bg-white/5 backdrop-blur-sm;
+}
+
+.card-hover {
+  @apply transition-all hover:bg-white/10 hover:translate-y-[-5px];
+}
+
+/* 3D flip effect for coach cards */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Media queries for responsive design */
+@media (max-width: 768px) {
+  .rotate-y-180 {
+    transform: none; /* Disable 3D effect on mobile */
+  }
+  
+  .preserve-3d {
+    transform-style: flat; /* Disable 3D effect on mobile */
+  }
+  
+  .backface-hidden {
+    backface-visibility: visible; /* Make both sides visible on mobile */
+  }
 }

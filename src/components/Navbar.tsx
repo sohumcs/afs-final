@@ -1,7 +1,6 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Ball } from "lucide-react";
+import { Menu, X, Basketball } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -44,7 +43,7 @@ const Navbar = () => {
             to="/"
             className="flex items-center"
           >
-            <Ball className="text-afs-orange mr-2 animate-ball-bounce" size={28} />
+            <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={28} />
             <span className="text-white text-2xl font-russo tracking-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">AFS</span> Academy
             </span>

@@ -1,10 +1,42 @@
 
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Card, CardContent } from "@/components/ui/card";
+import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
 import { Trophy, Award, Star, Users } from "lucide-react";
 
 const Coaches = () => {
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // Make elements visible immediately on component mount
+    setIsVisible(true);
+    
+    // Add observer for scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    // Observe all elements with the 'reveal' class
+    document.querySelectorAll('.reveal').forEach((element) => {
+      observer.observe(element);
+    });
+    
+    return () => {
+      // Clean up observer
+      document.querySelectorAll('.reveal').forEach((element) => {
+        observer.unobserve(element);
+      });
+    };
+  }, []);
+
   const coaches = [
     {
       id: 1,
@@ -54,7 +86,7 @@ const Coaches = () => {
       
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 reveal ${isVisible ? 'animated' : ''}`}>
             <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
               Our Team
             </span>
@@ -72,75 +104,66 @@ const Coaches = () => {
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
             {coaches.map((coach) => (
-              <div 
-                key={coach.id} 
-                className="group perspective-1000 hover:z-10"
-              >
-                <div className="relative transition-all duration-500 preserve-3d group-hover:rotate-y-180">
-                  {/* Front of card */}
-                  <div className="absolute inset-0 backface-hidden">
-                    <div className="card-hover glass-card h-full overflow-hidden rounded-xl">
-                      <div className="aspect-[3/4] relative overflow-hidden">
-                        <img
-                          src={coach.image}
-                          alt={coach.name}
-                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-110"
-                        />
-                        <div className="absolute inset-0 bg-gradient-to-t from-afs-dark/90 via-transparent to-transparent"></div>
-                        <div className="absolute bottom-0 left-0 p-6">
-                          <h3 className="text-2xl font-bold">{coach.name}</h3>
-                          <p className="text-afs-orange">{coach.role}</p>
-                        </div>
+              <HoverCard key={coach.id} openDelay={100} closeDelay={100}>
+                <HoverCardTrigger asChild>
+                  <div className={`card-hover glass-card overflow-hidden rounded-xl animate-fade-in relative cursor-pointer reveal ${isVisible ? 'animated' : ''}`}>
+                    <div className="aspect-[3/4] relative overflow-hidden">
+                      <img
+                        src={coach.image}
+                        alt={coach.name}
+                        className="w-full h-full object-cover object-center transition-transform duration-500 hover:scale-110"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-afs-dark/90 via-transparent to-transparent"></div>
+                      <div className="absolute bottom-0 left-0 p-6">
+                        <h3 className="text-2xl font-bold">{coach.name}</h3>
+                        <p className="text-afs-orange">{coach.role}</p>
                       </div>
                     </div>
+                  </div>
+                </HoverCardTrigger>
+                
+                <HoverCardContent className="w-96 glass-card border border-white/10 text-white animate-fade-in p-6">
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">{coach.name}</h3>
+                    <p className="text-afs-orange mb-4">{coach.role}</p>
+                    <p className="text-white/80 mb-6">{coach.bio}</p>
+                    
+                    <div className="flex items-center mb-3">
+                      <Trophy size={18} className="text-afs-orange mr-2" />
+                      <span className="text-white/80">Experience: {coach.experience}</span>
+                    </div>
+                    
+                    <h4 className="text-lg font-bold mb-2">Specialties:</h4>
+                    <ul className="space-y-1 mb-6">
+                      {coach.specialties.map((specialty, index) => (
+                        <li key={index} className="flex items-start">
+                          <Star size={16} className="text-afs-orange mr-2 mt-1 flex-shrink-0" />
+                          <span className="text-white/80">{specialty}</span>
+                        </li>
+                      ))}
+                    </ul>
+                    
+                    <h4 className="text-lg font-bold mb-2">Achievements:</h4>
+                    <ul className="space-y-1">
+                      {coach.achievements.map((achievement, index) => (
+                        <li key={index} className="flex items-start">
+                          <Award size={16} className="text-afs-orange mr-2 mt-1 flex-shrink-0" />
+                          <span className="text-white/80">{achievement}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
                   
-                  {/* Back of card */}
-                  <div className="absolute inset-0 backface-hidden rotate-y-180">
-                    <div className="glass-card h-full rounded-xl p-8 flex flex-col justify-between">
-                      <div>
-                        <h3 className="text-2xl font-bold mb-2">{coach.name}</h3>
-                        <p className="text-afs-orange mb-4">{coach.role}</p>
-                        <p className="text-white/80 mb-6">{coach.bio}</p>
-                        
-                        <div className="flex items-center mb-3">
-                          <Trophy size={18} className="text-afs-orange mr-2" />
-                          <span className="text-white/80">Experience: {coach.experience}</span>
-                        </div>
-                        
-                        <h4 className="text-lg font-bold mb-2">Specialties:</h4>
-                        <ul className="space-y-1 mb-6">
-                          {coach.specialties.map((specialty, index) => (
-                            <li key={index} className="flex items-start">
-                              <Star size={16} className="text-afs-orange mr-2 mt-1 flex-shrink-0" />
-                              <span className="text-white/80">{specialty}</span>
-                            </li>
-                          ))}
-                        </ul>
-                        
-                        <h4 className="text-lg font-bold mb-2">Achievements:</h4>
-                        <ul className="space-y-1">
-                          {coach.achievements.map((achievement, index) => (
-                            <li key={index} className="flex items-start">
-                              <Award size={16} className="text-afs-orange mr-2 mt-1 flex-shrink-0" />
-                              <span className="text-white/80">{achievement}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      </div>
-                      
-                      <button className="btn-primary mt-6 w-full">
-                        <Users size={18} />
-                        <span>Schedule Training</span>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
+                  <button className="btn-primary mt-6 w-full">
+                    <Users size={18} />
+                    <span>Schedule Training</span>
+                  </button>
+                </HoverCardContent>
+              </HoverCard>
             ))}
           </div>
           
-          <div className="max-w-3xl mx-auto text-center">
+          <div className={`max-w-3xl mx-auto text-center reveal ${isVisible ? 'animated' : ''}`}>
             <div className="bg-white/5 border border-white/10 rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Join Our Coaching Team</h3>
               <p className="text-white/70 mb-6">

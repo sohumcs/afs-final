@@ -1,12 +1,90 @@
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import ProgramCard from "../components/ProgramCard";
+import { ArrowRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+
+interface ProgramCardProps {
+  title: string;
+  description: string;
+  level: string;
+  duration: string;
+  image: string;
+}
+
+// Integrated ProgramCard component directly in the page file
+const ProgramCard = ({ title, description, level, duration, image }: ProgramCardProps) => {
+  return (
+    <div className="overflow-hidden rounded-xl relative group glass-card animate-fade-in">
+      <div className="aspect-video w-full overflow-hidden">
+        <img 
+          src={image} 
+          alt={title} 
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-afs-dark/90 to-transparent"></div>
+      </div>
+      
+      <div className="p-6 relative z-10">
+        <div className="flex justify-between items-start mb-3">
+          <h3 className="text-white">{title}</h3>
+          <span className="text-xs py-1 px-3 rounded-full uppercase tracking-wider bg-afs-orange/30 text-white border border-afs-orange/20">
+            {level}
+          </span>
+        </div>
+        
+        <p className="text-white/80 mb-4 text-sm">
+          {description}
+        </p>
+        
+        <div className="flex justify-between items-center">
+          <span className="text-white/60 text-sm">
+            {duration}
+          </span>
+          
+          <button className="flex items-center text-afs-orange hover:text-white transition-colors group/btn">
+            <span>Enroll Now</span>
+            <ArrowRight size={18} className="ml-2 transition-transform duration-300 group-hover/btn:translate-x-1" />
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const Programs = () => {
   const [selectedLevel, setSelectedLevel] = useState<string>("all");
+  const [isVisible, setIsVisible] = useState(false);
+  
+  useEffect(() => {
+    // Make elements visible immediately on component mount
+    setIsVisible(true);
+    
+    // Add observer for scroll animations
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('animated');
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    
+    // Observe all elements with the 'reveal' class
+    document.querySelectorAll('.reveal').forEach((element) => {
+      observer.observe(element);
+    });
+    
+    return () => {
+      // Clean up observer
+      document.querySelectorAll('.reveal').forEach((element) => {
+        observer.unobserve(element);
+      });
+    };
+  }, []);
   
   const programs = [
     {
@@ -69,7 +147,7 @@ const Programs = () => {
       
       <div className="pt-24 pb-20">
         <div className="container mx-auto px-4">
-          <div className="text-center mb-16">
+          <div className={`text-center mb-16 reveal ${isVisible ? 'animated' : ''}`}>
             <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
               Training Programs
             </span>
@@ -85,7 +163,7 @@ const Programs = () => {
             </p>
           </div>
           
-          <Tabs defaultValue="all" className="mb-12">
+          <Tabs defaultValue="all" className={`mb-12 reveal ${isVisible ? 'animated' : ''}`}>
             <div className="flex justify-center">
               <TabsList className="bg-white/5 border border-white/10">
                 <TabsTrigger 
@@ -126,83 +204,25 @@ const Programs = () => {
               </TabsList>
             </div>
             
-            <TabsContent value="all" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPrograms.map((program) => (
-                  <ProgramCard 
-                    key={program.id}
-                    title={program.title}
-                    description={program.description}
-                    level={program.level}
-                    duration={program.duration}
-                    image={program.image}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="beginner" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPrograms.map((program) => (
-                  <ProgramCard 
-                    key={program.id}
-                    title={program.title}
-                    description={program.description}
-                    level={program.level}
-                    duration={program.duration}
-                    image={program.image}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="intermediate" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPrograms.map((program) => (
-                  <ProgramCard 
-                    key={program.id}
-                    title={program.title}
-                    description={program.description}
-                    level={program.level}
-                    duration={program.duration}
-                    image={program.image}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="advanced" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPrograms.map((program) => (
-                  <ProgramCard 
-                    key={program.id}
-                    title={program.title}
-                    description={program.description}
-                    level={program.level}
-                    duration={program.duration}
-                    image={program.image}
-                  />
-                ))}
-              </div>
-            </TabsContent>
-            
-            <TabsContent value="expert" className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredPrograms.map((program) => (
-                  <ProgramCard 
-                    key={program.id}
-                    title={program.title}
-                    description={program.description}
-                    level={program.level}
-                    duration={program.duration}
-                    image={program.image}
-                  />
-                ))}
-              </div>
-            </TabsContent>
+            {["all", "beginner", "intermediate", "advanced", "expert"].map((level) => (
+              <TabsContent key={level} value={level} className="mt-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                  {filteredPrograms.map((program) => (
+                    <ProgramCard 
+                      key={program.id}
+                      title={program.title}
+                      description={program.description}
+                      level={program.level}
+                      duration={program.duration}
+                      image={program.image}
+                    />
+                  ))}
+                </div>
+              </TabsContent>
+            ))}
           </Tabs>
 
-          <div className="mt-16 text-center">
+          <div className={`mt-16 text-center reveal ${isVisible ? 'animated' : ''}`}>
             <div className="max-w-3xl mx-auto bg-white/5 border border-white/10 rounded-xl p-8">
               <h3 className="text-2xl font-bold mb-4">Not sure which program is right for you?</h3>
               <p className="text-white/70 mb-6">

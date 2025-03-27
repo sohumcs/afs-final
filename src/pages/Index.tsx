@@ -1,12 +1,8 @@
 
 import { useEffect } from "react";
-import VideoHero from "../components/VideoHero";
-import ProgramCard from "../components/ProgramCard";
-import CoachCard from "../components/CoachCard";
-import TestimonialSlider from "../components/TestimonialSlider";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, ArrowDown } from "lucide-react";
 
 const Index = () => {
   // Stats data
@@ -82,28 +78,224 @@ const Index = () => {
     }
   ];
 
-  // Smooth reveal animations on scroll
+  // Fix for animations - use a class-based approach instead of removing elements
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('animate-fade-in');
-          observer.unobserve(entry.target);
+    const animateElements = () => {
+      const revealElements = document.querySelectorAll('.reveal:not(.animated)');
+      
+      revealElements.forEach((element, index) => {
+        const elementTop = element.getBoundingClientRect().top;
+        const elementVisible = 150;
+        
+        if (elementTop < window.innerHeight - elementVisible) {
+          // Instead of changing opacity directly, add a class
+          element.classList.add('animated');
         }
       });
-    }, { threshold: 0.1 });
+    };
 
-    document.querySelectorAll('.reveal').forEach((el) => {
-      el.classList.add('opacity-0');
-      observer.observe(el);
-    });
-
+    // Run once immediately to show elements already in viewport
+    animateElements();
+    
+    // Add scroll event listener
+    window.addEventListener('scroll', animateElements);
+    
     return () => {
-      document.querySelectorAll('.reveal').forEach((el) => {
-        observer.unobserve(el);
-      });
+      window.removeEventListener('scroll', animateElements);
     };
   }, []);
+
+  // Video Hero Component integrated directly into the page
+  const VideoHero = () => {
+    const scrollDown = () => {
+      window.scrollTo({
+        top: window.innerHeight,
+        behavior: 'smooth'
+      });
+    };
+
+    return (
+      <div className="relative h-screen">
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+          poster="/images/basketball-poster.jpg"
+          style={{ objectFit: 'cover' }}
+        >
+          <source src="/videos/basketball-hero.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div className="absolute inset-0 bg-black/40 z-0"></div>
+        
+        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-white text-center">
+          <span className="text-sm uppercase tracking-widest mb-4 reveal animated">Welcome to</span>
+          <h1 className="text-5xl md:text-7xl font-bold mb-6 reveal animated">
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-afs-orange to-afs-red">AFS Academy</span>
+          </h1>
+          <p className="max-w-2xl mb-8 text-lg reveal animated">
+            Elevate your game with professional basketball training
+            designed to unlock your full potential on the court.
+          </p>
+          <div className="space-x-4 reveal animated">
+            <button className="btn-primary">
+              Explore Programs
+            </button>
+            <button className="btn-secondary">
+              Meet Our Coaches
+            </button>
+          </div>
+        </div>
+        
+        <button 
+          onClick={scrollDown}
+          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce z-10"
+          aria-label="Scroll down"
+        >
+          <ArrowDown size={32} />
+        </button>
+      </div>
+    );
+  };
+  
+  // Program Card Component integrated directly
+  const ProgramCard = ({ title, description, level, duration, image }) => {
+    return (
+      <div className="glass-card rounded-xl overflow-hidden card-hover h-full">
+        <div className="aspect-[16/9] w-full">
+          <img 
+            src={image} 
+            alt={title} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="p-6">
+          <h3 className="text-xl font-semibold mb-2">{title}</h3>
+          <p className="text-white/70 mb-4">{description}</p>
+          <div className="flex justify-between mb-4">
+            <div className="text-sm">
+              <span className="text-white/50">Level: </span>
+              <span className="text-white">{level}</span>
+            </div>
+            <div className="text-sm">
+              <span className="text-white/50">Duration: </span>
+              <span className="text-white">{duration}</span>
+            </div>
+          </div>
+          <button className="btn-primary w-full">
+            Learn More
+          </button>
+        </div>
+      </div>
+    );
+  };
+  
+  // Coach Card Component integrated directly
+  const CoachCard = ({ name, title, bio, image, achievements }) => {
+    return (
+      <div className="perspective-1000 h-full">
+        <div className="relative w-full h-full preserve-3d transition-all duration-500 card-hover group">
+          {/* Front Side */}
+          <div className="absolute backface-hidden w-full h-full">
+            <div className="glass-card rounded-xl overflow-hidden h-full flex flex-col">
+              <div className="aspect-[1/1] w-full">
+                <img 
+                  src={image} 
+                  alt={name} 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+              <div className="p-6 flex-grow flex flex-col">
+                <h3 className="text-xl font-semibold mb-1">{name}</h3>
+                <p className="text-afs-orange mb-3">{title}</p>
+                <p className="text-white/70 text-sm mb-4 flex-grow">{bio}</p>
+                <button className="btn-secondary w-full text-sm group-hover:opacity-0 transition-opacity">
+                  View Profile
+                </button>
+              </div>
+            </div>
+          </div>
+          
+          {/* Back Side */}
+          <div className="absolute backface-hidden w-full h-full rotate-y-180">
+            <div className="glass-card rounded-xl overflow-hidden h-full flex flex-col">
+              <div className="p-6 flex-grow">
+                <h3 className="text-xl font-semibold mb-1">{name}</h3>
+                <p className="text-afs-orange mb-4">{title}</p>
+                <h4 className="text-lg font-medium mb-3">Achievements</h4>
+                <ul className="space-y-2 mb-4">
+                  {achievements.map((achievement, i) => (
+                    <li key={i} className="flex items-start">
+                      <span className="text-afs-orange mr-2">•</span>
+                      <span className="text-white/80 text-sm">{achievement}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="p-6 pt-0">
+                <button className="btn-primary w-full text-sm">
+                  Contact Coach
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+  
+  // Testimonial Slider integrated directly
+  const TestimonialSlider = () => {
+    // Testimonial data 
+    const testimonials = [
+      {
+        name: "Michael Thompson",
+        role: "College Player",
+        text: "AFS Academy transformed my game completely. The personalized training and attention to detail helped me secure a basketball scholarship to my dream college.",
+        image: "/images/testimonial-1.jpg"
+      },
+      {
+        name: "Sarah Johnson",
+        role: "Professional Player",
+        text: "Training with AFS Academy was the turning point in my career. Their elite coaching staff pushed me to levels I didn't think were possible.",
+        image: "/images/testimonial-2.jpg"
+      },
+      {
+        name: "Jason Williams",
+        role: "High School Player",
+        text: "The coaches at AFS Academy don't just teach basketball skills, they instill confidence and mental toughness that translates beyond the court.",
+        image: "/images/testimonial-3.jpg"
+      }
+    ];
+
+    return (
+      <div className="glass-card rounded-xl p-8">
+        <div className="flex flex-col md:flex-row gap-6 items-center">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0">
+            <img 
+              src={testimonials[0].image} 
+              alt={testimonials[0].name} 
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div>
+            <div className="mb-4">
+              <svg className="h-5 w-5 text-afs-orange inline-block" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
+              </svg>
+            </div>
+            <p className="text-white/80 text-lg mb-4">{testimonials[0].text}</p>
+            <div>
+              <h4 className="font-semibold">{testimonials[0].name}</h4>
+              <p className="text-afs-orange text-sm">{testimonials[0].role}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <div className="min-h-screen bg-afs-dark text-white overflow-x-hidden">
@@ -127,13 +319,13 @@ const Index = () => {
       </section>
       
       {/* About Section */}
-      <section className="py-20 bg-afs-darkgray">
+      <section className="py-20 bg-afs-dark-accent">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="reveal">
               <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">About AFS Academy</span>
-              <h2 className="afs-heading text-white mb-6">
-                <span>Elevate Your Game</span> To New Heights
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                <span className="text-white">Elevate Your Game</span> To New Heights
               </h2>
               <p className="text-white/80 mb-6">
                 AFS Academy was founded by former professional players with a mission to develop elite basketball talent through personalized training and expert coaching. Our unique approach combines cutting-edge techniques with proven fundamentals.
@@ -154,7 +346,7 @@ const Index = () => {
                   className="w-full h-full object-cover" 
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 hero-gradient rounded-lg border border-white/20 flex items-center justify-center p-4 shadow-xl">
+              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-afs-orange to-afs-red rounded-lg border border-white/20 flex items-center justify-center p-4 shadow-xl">
                 <div className="text-center">
                   <div className="text-2xl font-bold">100%</div>
                   <div className="text-xs">Commitment to Excellence</div>
@@ -170,8 +362,8 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
             <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Our Programs</span>
-            <h2 className="afs-heading text-white mb-6">
-              <span>Training Programs</span> Designed For Success
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-white">Training Programs</span> Designed For Success
             </h2>
             <p className="text-white/80">
               Choose from our specialized basketball training programs, each tailored to specific skill levels and goals. From beginners to elite players, we have the perfect program for your development.
@@ -196,7 +388,7 @@ const Index = () => {
       </section>
       
       {/* CTA Section */}
-      <section className="relative py-24 bg-afs-darkgray overflow-hidden">
+      <section className="relative py-24 bg-afs-dark-accent overflow-hidden">
         <div className="absolute inset-0 z-0">
           <img 
             src="/images/cta-bg.jpg" 
@@ -233,8 +425,8 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
             <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Our Team</span>
-            <h2 className="afs-heading text-white mb-6">
-              <span>Expert Coaches</span> Leading The Way
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-white">Expert Coaches</span> Leading The Way
             </h2>
             <p className="text-white/80">
               Our coaching staff consists of former professional players and certified trainers with years of experience developing basketball talent at all levels.
@@ -252,12 +444,12 @@ const Index = () => {
       </section>
       
       {/* Testimonials Section */}
-      <section className="py-20 bg-gradient-to-b from-afs-darkgray to-afs-dark">
+      <section className="py-20 bg-gradient-to-b from-afs-dark-accent to-afs-dark">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
             <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Testimonials</span>
-            <h2 className="afs-heading text-white mb-6">
-              <span>Success Stories</span> From Our Players
+            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <span className="text-white">Success Stories</span> From Our Players
             </h2>
             <p className="text-white/80">
               Hear what our players have to say about their experience training with AFS Academy and how it transformed their basketball careers.
@@ -271,13 +463,13 @@ const Index = () => {
       </section>
       
       {/* Contact Form */}
-      <section className="py-20 bg-afs-darkgray">
+      <section className="py-20 bg-afs-dark-accent">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="reveal">
               <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Get In Touch</span>
-              <h2 className="afs-heading text-white mb-6">
-                <span>Questions?</span> Contact Us
+              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+                <span className="text-white">Questions?</span> Contact Us
               </h2>
               <p className="text-white/80 mb-8">
                 Have questions about our programs or want to schedule a visit? Fill out the form and one of our team members will get back to you within 24 hours.

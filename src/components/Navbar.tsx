@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Basketball } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -42,9 +42,10 @@ const Navbar = () => {
         <div className="flex justify-between items-center">
           <Link
             to="/"
-            className="flex items-center group"
+            className="flex items-center"
           >
-            <span className="text-white text-2xl font-bold tracking-tight">
+            <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={28} />
+            <span className="text-white text-2xl font-russo tracking-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">AFS</span> Academy
             </span>
           </Link>
@@ -55,10 +56,9 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-white hover:text-afs-orange transition-colors relative group"
+                className="text-white hover:text-afs-orange transition-colors nav-link-hover font-montserrat font-semibold"
               >
                 {link.name}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-afs-orange to-afs-red transition-all duration-300 group-hover:w-full"></span>
               </Link>
             ))}
           </div>
@@ -90,7 +90,7 @@ const Navbar = () => {
               <Link
                 key={link.name}
                 to={link.path}
-                className="text-white hover:text-afs-orange py-2 border-b border-white/10"
+                className="text-white hover:text-afs-orange py-2 border-b border-white/10 font-montserrat font-semibold"
                 onClick={() => setIsOpen(false)}
               >
                 {link.name}

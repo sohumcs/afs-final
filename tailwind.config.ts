@@ -19,6 +19,10 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'montserrat': ['Montserrat', 'sans-serif'],
+				'russo': ['Russo One', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -113,6 +117,10 @@ export default {
 				'scale': {
 					'0%': { transform: 'scale(0.95)' },
 					'100%': { transform: 'scale(1)' }
+				},
+				'ball-bounce': {
+					'0%, 100%': { transform: 'translateY(0)', animationTimingFunction: 'cubic-bezier(0.8, 0, 1, 1)' },
+					'50%': { transform: 'translateY(-25px)', animationTimingFunction: 'cubic-bezier(0, 0, 0.2, 1)' }
 				}
 			},
 			animation: {
@@ -124,7 +132,8 @@ export default {
 				'fade-in-left': 'fade-in-left 0.6s ease-out',
 				'fade-in-right': 'fade-in-right 0.6s ease-out',
 				'pulse-slow': 'pulse-slow 3s ease-in-out infinite',
-				'scale': 'scale 0.3s ease-out'
+				'scale': 'scale 0.3s ease-out',
+				'ball-bounce': 'ball-bounce 1s infinite'
 			}
 		}
 	},

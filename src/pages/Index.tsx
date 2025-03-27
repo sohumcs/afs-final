@@ -1,16 +1,16 @@
-
 import { useEffect } from "react";
 import Navbar from "../components/Navbar";
+import VideoHero from "../components/VideoHero";
 import Footer from "../components/Footer";
-import { ArrowRight, ArrowDown } from "lucide-react";
+import { ArrowRight, ArrowDown, Basketball, Award, Trophy, Star, TrendingUp, ChevronRight, Users, User, Clock } from "lucide-react";
 
 const Index = () => {
   // Stats data
   const stats = [
-    { value: "2,500+", label: "Players Trained" },
-    { value: "18", label: "Professional Coaches" },
-    { value: "95%", label: "Success Rate" },
-    { value: "12", label: "Years Experience" },
+    { value: "2,500+", label: "Players Trained", icon: <Users className="text-afs-orange" size={24} /> },
+    { value: "18", label: "Professional Coaches", icon: <User className="text-afs-orange" size={24} /> },
+    { value: "95%", label: "Success Rate", icon: <TrendingUp className="text-afs-orange" size={24} /> },
+    { value: "12", label: "Years Experience", icon: <Trophy className="text-afs-orange" size={24} /> },
   ];
 
   // Program data
@@ -78,17 +78,16 @@ const Index = () => {
     }
   ];
 
-  // Fix for animations - use a class-based approach instead of removing elements
+  // Fix for animations - use a class-based approach
   useEffect(() => {
     const animateElements = () => {
       const revealElements = document.querySelectorAll('.reveal:not(.animated)');
       
-      revealElements.forEach((element, index) => {
+      revealElements.forEach(element => {
         const elementTop = element.getBoundingClientRect().top;
         const elementVisible = 150;
         
         if (elementTop < window.innerHeight - elementVisible) {
-          // Instead of changing opacity directly, add a class
           element.classList.add('animated');
         }
       });
@@ -104,61 +103,6 @@ const Index = () => {
       window.removeEventListener('scroll', animateElements);
     };
   }, []);
-
-  // Video Hero Component integrated directly into the page
-  const VideoHero = () => {
-    const scrollDown = () => {
-      window.scrollTo({
-        top: window.innerHeight,
-        behavior: 'smooth'
-      });
-    };
-
-    return (
-      <div className="relative h-screen">
-        <video 
-          autoPlay 
-          muted 
-          loop 
-          playsInline
-          className="absolute inset-0 w-full h-full object-cover"
-          poster="/images/basketball-poster.jpg"
-          style={{ objectFit: 'cover' }}
-        >
-          <source src="/videos/basketball-hero.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-        <div className="absolute inset-0 bg-black/40 z-0"></div>
-        
-        <div className="absolute inset-0 z-10 flex flex-col items-center justify-center px-4 text-white text-center">
-          <span className="text-sm uppercase tracking-widest mb-4 reveal animated">Welcome to</span>
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 reveal animated">
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-afs-orange to-afs-red">AFS Academy</span>
-          </h1>
-          <p className="max-w-2xl mb-8 text-lg reveal animated">
-            Elevate your game with professional basketball training
-            designed to unlock your full potential on the court.
-          </p>
-          <div className="space-x-4 reveal animated">
-            <button className="btn-primary">
-              Explore Programs
-            </button>
-            <button className="btn-secondary">
-              Meet Our Coaches
-            </button>
-          </div>
-        </div>
-        
-        <button 
-          onClick={scrollDown}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white animate-bounce z-10"
-          aria-label="Scroll down"
-        >
-          <ArrowDown size={32} />
-        </button>
-      </div>
-    );
-  };
   
   // Program Card Component integrated directly
   const ProgramCard = ({ title, description, level, duration, image }) => {
@@ -172,20 +116,21 @@ const Index = () => {
           />
         </div>
         <div className="p-6">
-          <h3 className="text-xl font-semibold mb-2">{title}</h3>
-          <p className="text-white/70 mb-4">{description}</p>
-          <div className="flex justify-between mb-4">
-            <div className="text-sm">
-              <span className="text-white/50">Level: </span>
+          <h3 className="text-xl font-russo mb-2">{title}</h3>
+          <p className="text-white/70 mb-4 font-montserrat">{description}</p>
+          <div className="flex justify-between mb-4 font-montserrat">
+            <div className="text-sm flex items-center">
+              <Star className="text-afs-orange mr-1" size={16} />
               <span className="text-white">{level}</span>
             </div>
-            <div className="text-sm">
-              <span className="text-white/50">Duration: </span>
+            <div className="text-sm flex items-center">
+              <Clock className="text-afs-orange mr-1" size={16} />
               <span className="text-white">{duration}</span>
             </div>
           </div>
-          <button className="btn-primary w-full">
+          <button className="btn-primary w-full flex items-center justify-center">
             Learn More
+            <ChevronRight size={18} />
           </button>
         </div>
       </div>
@@ -195,52 +140,36 @@ const Index = () => {
   // Coach Card Component integrated directly
   const CoachCard = ({ name, title, bio, image, achievements }) => {
     return (
-      <div className="perspective-1000 h-full">
-        <div className="relative w-full h-full preserve-3d transition-all duration-500 card-hover group">
-          {/* Front Side */}
-          <div className="absolute backface-hidden w-full h-full">
-            <div className="glass-card rounded-xl overflow-hidden h-full flex flex-col">
-              <div className="aspect-[1/1] w-full">
-                <img 
-                  src={image} 
-                  alt={name} 
-                  className="w-full h-full object-cover"
-                />
-              </div>
-              <div className="p-6 flex-grow flex flex-col">
-                <h3 className="text-xl font-semibold mb-1">{name}</h3>
-                <p className="text-afs-orange mb-3">{title}</p>
-                <p className="text-white/70 text-sm mb-4 flex-grow">{bio}</p>
-                <button className="btn-secondary w-full text-sm group-hover:opacity-0 transition-opacity">
-                  View Profile
-                </button>
-              </div>
-            </div>
+      <div className="glass-card rounded-xl overflow-hidden h-full flex flex-col card-hover">
+        <div className="aspect-[1/1] w-full">
+          <img 
+            src={image} 
+            alt={name} 
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="p-6 flex-grow flex flex-col">
+          <h3 className="text-xl font-russo mb-1">{name}</h3>
+          <p className="text-afs-orange mb-3 font-montserrat">{title}</p>
+          <p className="text-white/70 text-sm mb-4 flex-grow font-montserrat">{bio}</p>
+          <div>
+            <h4 className="text-sm font-medium mb-2 flex items-center">
+              <Trophy className="text-afs-orange mr-2" size={16} />
+              <span className="font-russo">Key Achievements</span>
+            </h4>
+            <ul className="space-y-1 mb-4">
+              {achievements.slice(0, 2).map((achievement, i) => (
+                <li key={i} className="flex items-start text-xs font-montserrat">
+                  <Award className="text-afs-orange mr-1 flex-shrink-0" size={14} />
+                  <span className="text-white/80">{achievement}</span>
+                </li>
+              ))}
+            </ul>
           </div>
-          
-          {/* Back Side */}
-          <div className="absolute backface-hidden w-full h-full rotate-y-180">
-            <div className="glass-card rounded-xl overflow-hidden h-full flex flex-col">
-              <div className="p-6 flex-grow">
-                <h3 className="text-xl font-semibold mb-1">{name}</h3>
-                <p className="text-afs-orange mb-4">{title}</p>
-                <h4 className="text-lg font-medium mb-3">Achievements</h4>
-                <ul className="space-y-2 mb-4">
-                  {achievements.map((achievement, i) => (
-                    <li key={i} className="flex items-start">
-                      <span className="text-afs-orange mr-2">•</span>
-                      <span className="text-white/80 text-sm">{achievement}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-              <div className="p-6 pt-0">
-                <button className="btn-primary w-full text-sm">
-                  Contact Coach
-                </button>
-              </div>
-            </div>
-          </div>
+          <button className="btn-primary w-full text-sm flex items-center justify-center">
+            View Profile
+            <ChevronRight size={16} />
+          </button>
         </div>
       </div>
     );
@@ -273,7 +202,7 @@ const Index = () => {
     return (
       <div className="glass-card rounded-xl p-8">
         <div className="flex flex-col md:flex-row gap-6 items-center">
-          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0">
+          <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0 border-2 border-afs-orange">
             <img 
               src={testimonials[0].image} 
               alt={testimonials[0].name} 
@@ -281,15 +210,15 @@ const Index = () => {
             />
           </div>
           <div>
-            <div className="mb-4">
-              <svg className="h-5 w-5 text-afs-orange inline-block" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
+            <div className="mb-4 flex">
+              <Basketball className="h-5 w-5 text-afs-orange mr-2" />
+              <Basketball className="h-5 w-5 text-afs-orange mr-2" />
+              <Basketball className="h-5 w-5 text-afs-orange" />
             </div>
-            <p className="text-white/80 text-lg mb-4">{testimonials[0].text}</p>
+            <p className="text-white/80 text-lg mb-4 font-montserrat">{testimonials[0].text}</p>
             <div>
-              <h4 className="font-semibold">{testimonials[0].name}</h4>
-              <p className="text-afs-orange text-sm">{testimonials[0].role}</p>
+              <h4 className="font-russo">{testimonials[0].name}</h4>
+              <p className="text-afs-orange text-sm font-montserrat">{testimonials[0].role}</p>
             </div>
           </div>
         </div>
@@ -298,19 +227,22 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-afs-dark text-white overflow-x-hidden">
+    <div className="min-h-screen bg-afs-dark text-white overflow-x-hidden font-montserrat">
       <Navbar />
       
       {/* Hero Section */}
       <VideoHero />
       
       {/* Stats Section */}
-      <section className="py-16 bg-gradient-to-b from-afs-dark to-afs-darkgray">
+      <section className="py-16 bg-gradient-to-b from-afs-dark to-afs-darkgray basketball-pattern">
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
             {stats.map((stat, index) => (
-              <div key={index} className="text-center reveal" style={{ animationDelay: `${index * 100}ms` }}>
-                <div className="text-3xl md:text-5xl font-bold mb-2 text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">{stat.value}</div>
+              <div key={index} className="text-center reveal glass-card py-6 rounded-xl">
+                <div className="flex justify-center mb-3">
+                  {stat.icon}
+                </div>
+                <div className="text-3xl md:text-4xl font-russo mb-2 text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">{stat.value}</div>
                 <div className="text-white/70">{stat.label}</div>
               </div>
             ))}
@@ -323,8 +255,13 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="reveal">
-              <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">About AFS Academy</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <div className="flex items-center mb-3">
+                <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
+                <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
+                  About AFS Academy
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-russo mb-6">
                 <span className="text-white">Elevate Your Game</span> To New Heights
               </h2>
               <p className="text-white/80 mb-6">
@@ -333,8 +270,9 @@ const Index = () => {
               <p className="text-white/80 mb-8">
                 We focus on developing the complete player - from technical skills and basketball IQ to mental strength and physical conditioning. Our proven track record includes helping players reach collegiate and professional levels.
               </p>
-              <button className="btn-primary">
+              <button className="btn-primary flex items-center">
                 Learn More About Us
+                <ChevronRight size={18} className="ml-1" />
               </button>
             </div>
             
@@ -348,9 +286,12 @@ const Index = () => {
               </div>
               <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-afs-orange to-afs-red rounded-lg border border-white/20 flex items-center justify-center p-4 shadow-xl">
                 <div className="text-center">
-                  <div className="text-2xl font-bold">100%</div>
+                  <div className="text-2xl font-russo">100%</div>
                   <div className="text-xs">Commitment to Excellence</div>
                 </div>
+              </div>
+              <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full flex items-center justify-center bg-afs-dark border-2 border-afs-orange">
+                <Basketball className="text-afs-orange animate-ball-bounce" size={28} />
               </div>
             </div>
           </div>
@@ -361,8 +302,13 @@ const Index = () => {
       <section className="py-20 bg-afs-dark">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
-            <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Our Programs</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <div className="flex items-center justify-center mb-3">
+              <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
+              <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
+                Our Programs
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-russo mb-6">
               <span className="text-white">Training Programs</span> Designed For Success
             </h2>
             <p className="text-white/80">
@@ -372,7 +318,7 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-6 mb-10">
             {programs.map((program, index) => (
-              <div key={index} className="reveal" style={{ animationDelay: `${index * 100}ms` }}>
+              <div key={index} className="reveal">
                 <ProgramCard {...program} />
               </div>
             ))}
@@ -396,22 +342,30 @@ const Index = () => {
             className="w-full h-full object-cover opacity-20"
           />
           <div className="absolute inset-0 bg-gradient-to-r from-afs-dark to-transparent"></div>
+          <div className="absolute inset-0 basketball-pattern opacity-30"></div>
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl">
             <div className="reveal">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6">
-                Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">dominate</span> the court?
-              </h2>
-              <p className="text-xl text-white/80 mb-8">
+              <div className="flex items-center mb-6">
+                <div className="w-20 h-20 rounded-full bg-gradient-to-r from-afs-orange to-afs-red flex items-center justify-center mr-6">
+                  <Basketball size={32} />
+                </div>
+                <h2 className="text-4xl md:text-5xl font-russo">
+                  Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">dominate</span> the court?
+                </h2>
+              </div>
+              <p className="text-xl text-white/80 mb-8 ml-26">
                 Join AFS Academy today and start your journey to basketball excellence. Limited spots available for our elite training programs.
               </p>
-              <div className="flex flex-wrap gap-4">
-                <button className="btn-primary">
+              <div className="flex flex-wrap gap-4 ml-26">
+                <button className="btn-primary flex items-center">
+                  <Basketball className="mr-2" size={20} />
                   Enroll Now
                 </button>
-                <button className="btn-secondary">
+                <button className="btn-secondary flex items-center">
+                  <ArrowRight className="mr-2" size={20} />
                   Schedule Tour
                 </button>
               </div>
@@ -421,11 +375,16 @@ const Index = () => {
       </section>
       
       {/* Coaches Section */}
-      <section className="py-20 bg-afs-dark">
+      <section className="py-20 bg-afs-dark basketball-pattern">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
-            <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Our Team</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <div className="flex items-center justify-center mb-3">
+              <User className="text-afs-orange mr-2" size={24} />
+              <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
+                Our Team
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-russo mb-6">
               <span className="text-white">Expert Coaches</span> Leading The Way
             </h2>
             <p className="text-white/80">
@@ -435,7 +394,7 @@ const Index = () => {
           
           <div className="grid md:grid-cols-3 gap-8">
             {coaches.map((coach, index) => (
-              <div key={index} className="reveal" style={{ animationDelay: `${index * 100}ms` }}>
+              <div key={index} className="reveal">
                 <CoachCard {...coach} />
               </div>
             ))}
@@ -447,8 +406,13 @@ const Index = () => {
       <section className="py-20 bg-gradient-to-b from-afs-dark-accent to-afs-dark">
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
-            <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Testimonials</span>
-            <h2 className="text-3xl md:text-4xl font-bold mb-6">
+            <div className="flex items-center justify-center mb-3">
+              <Star className="text-afs-orange mr-2" size={24} />
+              <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
+                Testimonials
+              </span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-russo mb-6">
               <span className="text-white">Success Stories</span> From Our Players
             </h2>
             <p className="text-white/80">
@@ -467,8 +431,13 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12">
             <div className="reveal">
-              <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider mb-3 bg-afs-orange/20 text-afs-orange border border-afs-orange/10">Get In Touch</span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6">
+              <div className="flex items-center mb-3">
+                <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
+                <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
+                  Get In Touch
+                </span>
+              </div>
+              <h2 className="text-3xl md:text-4xl font-russo mb-6">
                 <span className="text-white">Questions?</span> Contact Us
               </h2>
               <p className="text-white/80 mb-8">
@@ -484,7 +453,7 @@ const Index = () => {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold mb-1">Location</h5>
+                    <h5 className="font-russo mb-1">Location</h5>
                     <p className="text-white/70 text-sm">123 Basketball Avenue, Sports City, SC 10001</p>
                   </div>
                 </div>
@@ -496,7 +465,7 @@ const Index = () => {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold mb-1">Email</h5>
+                    <h5 className="font-russo mb-1">Email</h5>
                     <p className="text-white/70 text-sm">contact@afsacademy.com</p>
                   </div>
                 </div>
@@ -508,7 +477,7 @@ const Index = () => {
                     </svg>
                   </div>
                   <div>
-                    <h5 className="font-semibold mb-1">Phone</h5>
+                    <h5 className="font-russo mb-1">Phone</h5>
                     <p className="text-white/70 text-sm">(123) 456-7890</p>
                   </div>
                 </div>
@@ -520,41 +489,44 @@ const Index = () => {
                 <form className="space-y-5">
                   <div className="grid md:grid-cols-2 gap-5">
                     <div>
-                      <label className="block text-white/80 text-sm mb-2">Full Name</label>
+                      <label className="block text-white/80 text-sm mb-2 font-russo">Full Name</label>
                       <input 
                         type="text" 
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white"
+                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white font-montserrat"
                         placeholder="Your name"
                       />
                     </div>
                     <div>
-                      <label className="block text-white/80 text-sm mb-2">Email Address</label>
+                      <label className="block text-white/80 text-sm mb-2 font-russo">Email Address</label>
                       <input 
                         type="email" 
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white"
+                        className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white font-montserrat"
                         placeholder="Your email"
                       />
                     </div>
                   </div>
                   
                   <div>
-                    <label className="block text-white/80 text-sm mb-2">Subject</label>
+                    <label className="block text-white/80 text-sm mb-2 font-russo">Subject</label>
                     <input 
                       type="text" 
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white font-montserrat"
                       placeholder="How can we help you?"
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-white/80 text-sm mb-2">Message</label>
+                    <label className="block text-white/80 text-sm mb-2 font-russo">Message</label>
                     <textarea 
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white h-32"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 focus:outline-none focus:ring-2 focus:ring-afs-orange/50 text-white font-montserrat h-32"
                       placeholder="Tell us more about your inquiry"
                     ></textarea>
                   </div>
                   
-                  <button type="submit" className="btn-primary w-full">
+                  <button type="submit" className="btn-primary w-full flex items-center justify-center">
+                    <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path>
+                    </svg>
                     Send Message
                   </button>
                 </form>

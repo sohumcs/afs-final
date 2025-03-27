@@ -55,7 +55,10 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground font-montserrat;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-russo;
   }
 }
 
@@ -115,81 +118,73 @@
   animation: fadeIn 0.6s ease-out forwards;
 }
 
-/* Animation delays for cascading effect */
-.delay-100 {
-  animation-delay: 100ms;
-}
-
-.delay-200 {
-  animation-delay: 200ms;
-}
-
-.delay-300 {
-  animation-delay: 300ms;
-}
-
 /* Buttons */
 .btn-primary {
-  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red text-white font-semibold py-3 px-6 rounded-lg 
+  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red text-white font-bold py-3 px-6 rounded-lg 
   hover:from-afs-orange/90 hover:to-afs-red/90 transition-all shadow-lg hover:shadow-xl 
   hover:translate-y-[-2px] active:translate-y-0 active:shadow-lg;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-semibold py-3 px-6 rounded-lg 
+  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold py-3 px-6 rounded-lg 
   hover:bg-white/15 transition-all;
 }
 
 /* Cards */
 .glass-card {
-  @apply bg-white/5 backdrop-blur-sm;
+  @apply bg-white/5 backdrop-blur-sm border border-white/10 shadow-lg;
 }
 
 .card-hover {
   @apply transition-all hover:bg-white/10 hover:translate-y-[-5px];
 }
 
-/* 3D flip effect for coach cards */
-.perspective-1000 {
-  perspective: 1000px;
+/* Video container for hero section */
+.video-container {
+  @apply relative h-screen w-full overflow-hidden;
 }
 
-.preserve-3d {
-  transform-style: preserve-3d;
+.video-bg {
+  @apply absolute top-0 left-0 w-full h-full object-cover;
 }
 
-.backface-hidden {
-  backface-visibility: hidden;
+.video-overlay {
+  @apply absolute inset-0 bg-black/60 z-0;
 }
 
-.rotate-y-180 {
-  transform: rotateY(180deg);
+/* Basketball pattern background */
+.basketball-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 A50 50 0 0 1 100 50 A50 50 0 0 1 50 100 A50 50 0 0 1 0 50 A50 50 0 0 1 50 0' fill='none' stroke='rgba(255,87,34,0.1)' stroke-width='1'/%3E%3Cpath d='M0,50 C25,30 75,30 100,50 C75,70 25,70 0,50 M50,0 C30,25 30,75 50,100 C70,75 70,25 50,0' fill='none' stroke='rgba(255,87,34,0.1)' stroke-width='1'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 100px 100px;
 }
 
-/* Hover effect for coach cards */
-.group:hover .rotate-y-180 {
-  transform: rotateY(0);
+/* Custom heading style */
+.afs-heading {
+  @apply font-russo text-5xl md:text-7xl font-bold tracking-tight leading-tight;
 }
 
-.group:hover {
-  transform: rotateY(180deg);
+/* Animated basketball icon */
+.ball-icon {
+  @apply inline-block align-middle animate-ball-bounce;
+}
+
+/* Custom underline animation for navbar (without rotation) */
+.nav-link-hover {
+  @apply relative overflow-hidden;
+}
+
+.nav-link-hover::after {
+  @apply content-[''] absolute bottom-0 left-0 w-0 h-0.5 bg-gradient-to-r from-afs-orange to-afs-red transition-all duration-300 ease-out;
+}
+
+.nav-link-hover:hover::after {
+  @apply w-full;
 }
 
 /* Media queries for responsive design */
 @media (max-width: 768px) {
-  .rotate-y-180 {
-    transform: none; /* Disable 3D effect on mobile */
-  }
-  
-  .preserve-3d {
-    transform-style: flat; /* Disable 3D effect on mobile */
-  }
-  
-  .backface-hidden {
-    backface-visibility: visible; /* Make both sides visible on mobile */
-  }
-  
-  .group:hover {
-    transform: none; /* Disable 3D effect on mobile */
+  .afs-heading {
+    @apply text-4xl;
   }
 }

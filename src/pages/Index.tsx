@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import VideoHero from "../components/VideoHero";
 import Footer from "../components/Footer";
-import { ArrowRight, ArrowDown, Basketball, Award, Trophy, Star, TrendingUp, ChevronRight, Users, User, Clock } from "lucide-react";
+import { ArrowRight, ArrowDown, Ball, Award, Trophy, Star, TrendingUp, ChevronRight, Users, User, Clock } from "lucide-react";
 
 const Index = () => {
   // Stats data
@@ -211,9 +211,9 @@ const Index = () => {
           </div>
           <div>
             <div className="mb-4 flex">
-              <Basketball className="h-5 w-5 text-afs-orange mr-2" />
-              <Basketball className="h-5 w-5 text-afs-orange mr-2" />
-              <Basketball className="h-5 w-5 text-afs-orange" />
+              <Ball className="h-5 w-5 text-afs-orange mr-2" />
+              <Ball className="h-5 w-5 text-afs-orange mr-2" />
+              <Ball className="h-5 w-5 text-afs-orange" />
             </div>
             <p className="text-white/80 text-lg mb-4 font-montserrat">{testimonials[0].text}</p>
             <div>
@@ -256,7 +256,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="reveal">
               <div className="flex items-center mb-3">
-                <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
+                <Ball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
                 <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
                   About AFS Academy
                 </span>
@@ -291,7 +291,7 @@ const Index = () => {
                 </div>
               </div>
               <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full flex items-center justify-center bg-afs-dark border-2 border-afs-orange">
-                <Basketball className="text-afs-orange animate-ball-bounce" size={28} />
+                <Ball className="text-afs-orange animate-ball-bounce" size={28} />
               </div>
             </div>
           </div>
@@ -303,7 +303,7 @@ const Index = () => {
         <div className="container mx-auto px-4">
           <div className="text-center max-w-2xl mx-auto mb-12 reveal">
             <div className="flex items-center justify-center mb-3">
-              <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
+              <Ball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
               <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
                 Our Programs
               </span>
@@ -350,7 +350,7 @@ const Index = () => {
             <div className="reveal">
               <div className="flex items-center mb-6">
                 <div className="w-20 h-20 rounded-full bg-gradient-to-r from-afs-orange to-afs-red flex items-center justify-center mr-6">
-                  <Basketball size={32} />
+                  <Ball size={32} />
                 </div>
                 <h2 className="text-4xl md:text-5xl font-russo">
                   Ready to <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">dominate</span> the court?
@@ -361,7 +361,7 @@ const Index = () => {
               </p>
               <div className="flex flex-wrap gap-4 ml-26">
                 <button className="btn-primary flex items-center">
-                  <Basketball className="mr-2" size={20} />
+                  <Ball className="mr-2" size={20} />
                   Enroll Now
                 </button>
                 <button className="btn-secondary flex items-center">
@@ -432,7 +432,7 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12">
             <div className="reveal">
               <div className="flex items-center mb-3">
-                <Basketball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
+                <Ball className="text-afs-orange mr-2 animate-ball-bounce" size={24} />
                 <span className="inline-block py-1 px-3 rounded-full text-xs uppercase tracking-wider font-bold bg-afs-orange/20 text-afs-orange border border-afs-orange/10">
                   Get In Touch
                 </span>

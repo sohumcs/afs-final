@@ -1,11 +1,14 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, CircleDot } from "lucide-react";
+import { Menu, X, CircleDot, Moon, Sun } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
+import { useTheme } from "@/hooks/useTheme";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -34,7 +37,7 @@ const Navbar = () => {
     <nav
       className={`fixed w-full z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-afs-dark/90 backdrop-blur-md py-2 shadow-lg"
+          ? "bg-afs-dark/90 backdrop-blur-md py-2 shadow-lg dark:bg-black/80"
           : "bg-transparent py-4"
       }`}
     >
@@ -63,7 +66,17 @@ const Navbar = () => {
             ))}
           </div>
 
-          <div className="hidden md:block">
+          <div className="hidden md:flex items-center gap-4">
+            {/* Theme Toggle */}
+            <div className="flex items-center gap-2">
+              <Sun size={18} className="text-white opacity-80" />
+              <Switch 
+                checked={theme === "dark"} 
+                onCheckedChange={toggleTheme}
+                className="data-[state=checked]:bg-afs-orange"
+              />
+              <Moon size={18} className="text-white opacity-80" />
+            </div>
             <Link to="/login" className="btn-primary">
               Login
             </Link>
@@ -81,7 +94,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden absolute left-0 right-0 p-4 mt-2 bg-afs-dark/95 backdrop-blur-lg shadow-lg transition-transform duration-300 ease-in-out ${
+          className={`md:hidden absolute left-0 right-0 p-4 mt-2 bg-afs-dark/95 backdrop-blur-lg shadow-lg transition-transform duration-300 ease-in-out dark:bg-black/90 ${
             isOpen ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0 pointer-events-none"
           }`}
         >
@@ -96,6 +109,18 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <div className="flex items-center justify-between py-2 border-b border-white/10">
+              <span className="text-white font-montserrat font-semibold">Dark Mode</span>
+              <div className="flex items-center gap-2">
+                <Sun size={16} className="text-white opacity-80" />
+                <Switch 
+                  checked={theme === "dark"} 
+                  onCheckedChange={toggleTheme}
+                  className="data-[state=checked]:bg-afs-orange"
+                />
+                <Moon size={16} className="text-white opacity-80" />
+              </div>
+            </div>
             <Link
               to="/login"
               className="btn-primary text-center"

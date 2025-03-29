@@ -12,25 +12,25 @@ import { cn } from "@/lib/utils";
 const videoData = [
   {
     id: 1,
-    src: "/videos/training-1.mp4",
+    src: "/media/basketball.mp4",
     poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
     title: "Training Session 1"
   },
   {
     id: 2,
-    src: "/videos/training-2.mp4",
+    src: "/media/basketballssss_2.mp4",
     poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png", 
     title: "Training Session 2"
   },
   {
     id: 3,
-    src: "/videos/training-3.mp4",
+    src: "/media/basketballssss_p3.mp4",
     poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
     title: "Training Session 3"
   },
   {
     id: 4,
-    src: "/videos/training-4.mp4",
+    src: "/media/basketballssss.mp4",
     poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
     title: "Training Session 4"
   }

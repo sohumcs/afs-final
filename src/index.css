@@ -1,4 +1,3 @@
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -134,14 +133,16 @@
 
 /* Buttons */
 .btn-primary {
-  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red text-white font-bold py-3 px-6 rounded-lg 
+  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red font-bold py-3 px-6 rounded-lg 
   hover:from-afs-orange/90 hover:to-afs-red/90 transition-all shadow-lg hover:shadow-xl 
   hover:translate-y-[-2px] active:translate-y-0 active:shadow-lg;
+  color: white;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold py-3 px-6 rounded-lg 
+  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 font-bold py-3 px-6 rounded-lg 
   hover:bg-white/15 transition-all;
+  color: white;
 }
 
 /* Cards */
@@ -205,17 +206,20 @@
 
 /* Light mode specific styles */
 .light .btn-secondary {
-  @apply bg-afs-dark/10 border-afs-dark/20 text-afs-dark hover:bg-afs-dark/15;
+  background-color: rgba(var(--afs-dark-rgb), 0.1);
+  border-color: rgba(var(--afs-dark-rgb), 0.2);
+  color: var(--afs-dark);
 }
 
+.light .btn-secondary:hover {
+  background-color: rgba(var(--afs-dark-rgb), 0.15);
+}
+
+/* Fix for circular dependency */
 .light .text-white {
-  @apply text-afs-dark;
+  color: var(--afs-dark);
 }
 
 .light .text-white\/70 {
-  @apply text-afs-dark/70;
-}
-
-.light .btn-primary {
-  @apply text-white;
+  color: rgba(var(--afs-dark-rgb), 0.7);
 }

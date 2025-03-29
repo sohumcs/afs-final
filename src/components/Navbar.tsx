@@ -41,7 +41,7 @@ const Navbar = () => {
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <Sun className="text-afs-dark h-6 w-6" />
+        <Sun className="h-6 w-6 text-afs-dark" />
       ) : (
         <div className="relative">
           <CircleDot className="text-afs-orange h-6 w-6 animate-ball-bounce" />
@@ -65,7 +65,7 @@ const Navbar = () => {
             className="flex items-center"
           >
             <CircleDot className="text-afs-orange mr-2 animate-ball-bounce" size={28} />
-            <span className="text-white text-2xl font-russo tracking-tight">
+            <span className="text-2xl font-russo tracking-tight text-white">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">AFS</span> Academy
             </span>
           </Link>

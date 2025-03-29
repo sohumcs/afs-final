@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import Navbar from "../components/Navbar";
 import VideoHero from "../components/VideoHero";
 import Footer from "../components/Footer";
+import VideoSlideshow from "../components/VideoSlideshow";
 import { ArrowRight, ArrowDown, CircleDot, Award, Trophy, Star, TrendingUp, ChevronRight, Users, User, Clock } from "lucide-react";
 
 const Index = () => {
@@ -232,6 +233,9 @@ const Index = () => {
       
       {/* Hero Section */}
       <VideoHero />
+      
+      {/* Video Slideshow Section - NEW SECTION */}
+      <VideoSlideshow />
       
       {/* Stats Section */}
       <section className="py-16 bg-gradient-to-b from-afs-dark to-afs-darkgray basketball-pattern">

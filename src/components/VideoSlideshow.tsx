@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -39,19 +39,58 @@ const videoData = [
 const VideoSlideshow = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
+  const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
 
-  const handleSelect = () => {
+  // Handle video playback on slide change
+  useEffect(() => {
     if (!api) return;
-    setActiveIndex(api.selectedScrollSnap());
-  };
 
-  const setupCarousel = (carouselApi: CarouselApi) => {
-    setApi(carouselApi);
-    carouselApi.on("select", handleSelect);
-    return () => {
-      carouselApi.off("select", handleSelect);
+    const handleSelect = () => {
+      const newIndex = api.selectedScrollSnap();
+      setActiveIndex(newIndex);
+      
+      // Pause all videos and play the active one
+      videoRefs.current.forEach((video, i) => {
+        if (video) {
+          if (i === newIndex) {
+            video.currentTime = 0;
+            video.play().catch(e => console.log("Autoplay prevented:", e));
+          } else {
+            video.pause();
+          }
+        }
+      });
     };
-  };
+
+    api.on("select", handleSelect);
+    return () => {
+      api.off("select", handleSelect);
+    };
+  }, [api]); // Fixed: Added api as dependency
+
+  // Initialize video event listeners for seamless looping
+  useEffect(() => {
+    const currentRefs = videoRefs.current;
+
+    const handleEnded = (video: HTMLVideoElement) => {
+      video.currentTime = 0;
+      video.play().catch(e => console.log("Loop play error:", e));
+    };
+
+    currentRefs.forEach((video) => {
+      if (video) {
+        video.addEventListener('ended', () => handleEnded(video));
+      }
+    });
+
+    return () => {
+      currentRefs.forEach((video) => {
+        if (video) {
+          video.removeEventListener('ended', () => handleEnded(video));
+        }
+      });
+    };
+  }, []);
 
   return (
     <section className="relative py-10 bg-afs-dark-accent overflow-hidden dark:bg-black/50">
@@ -71,7 +110,7 @@ const VideoSlideshow = () => {
         <div className="relative group">
           <Carousel
             className="w-full"
-            setApi={setupCarousel}
+            setApi={setApi}
             opts={{
               loop: true,
               align: "center"
@@ -95,13 +134,18 @@ const VideoSlideshow = () => {
                     )}>
                       <div className="rounded-lg overflow-hidden w-full h-full">
                         <video
+                          ref={el => videoRefs.current[index] = el}
                           src={video.src}
                           poster={video.poster}
                           className="w-full h-full object-cover aspect-video"
                           loop
                           muted
-                          autoPlay={activeIndex === index}
                           playsInline
+                          preload="auto"
+                          onEnded={(e) => {
+                            e.currentTarget.currentTime = 0;
+                            e.currentTarget.play();
+                          }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
                         <div className="absolute bottom-0 left-0 w-full p-4 text-left">
@@ -114,23 +158,24 @@ const VideoSlideshow = () => {
               ))}
             </CarouselContent>
 
-            {/* Enhanced Previous Arrow */}
+            {/* Sexy Navigation Arrows */}
             <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30 
-              h-12 w-12 rounded-full bg-white/10 backdrop-blur-lg border-2 border-afs-orange/30
-              text-afs-orange hover:bg-afs-orange/20 hover:border-afs-orange/60
-              transition-all duration-300 shadow-lg hover:shadow-afs-orange/30
+              h-14 w-14 rounded-full bg-gradient-to-br from-afs-orange/90 to-afs-red/90 
+              text-white hover:from-afs-orange hover:to-afs-red
+              transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-afs-orange/40
               flex items-center justify-center
               group-hover:opacity-100 opacity-0 md:opacity-100
               hover:scale-110 transform-gpu
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-afs-orange">
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white
+              border-2 border-white/20">
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                width="24" 
-                height="24" 
+                width="28" 
+                height="28" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="currentColor" 
-                strokeWidth="2" 
+                strokeWidth="3" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
                 className="w-6 h-6"
@@ -140,23 +185,23 @@ const VideoSlideshow = () => {
               <span className="sr-only">Previous slide</span>
             </CarouselPrevious>
             
-            {/* Enhanced Next Arrow */}
             <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30
-              h-12 w-12 rounded-full bg-white/10 backdrop-blur-lg border-2 border-afs-orange/30
-              text-afs-orange hover:bg-afs-orange/20 hover:border-afs-orange/60
-              transition-all duration-300 shadow-lg hover:shadow-afs-orange/30
+              h-14 w-14 rounded-full bg-gradient-to-br from-afs-orange/90 to-afs-red/90
+              text-white hover:from-afs-orange hover:to-afs-red
+              transition-all duration-300 shadow-xl hover:shadow-2xl hover:shadow-afs-orange/40
               flex items-center justify-center
               group-hover:opacity-100 opacity-0 md:opacity-100
               hover:scale-110 transform-gpu
-              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-afs-orange">
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white
+              border-2 border-white/20">
               <svg 
                 xmlns="http://www.w3.org/2000/svg" 
-                width="24" 
-                height="24" 
+                width="28" 
+                height="28" 
                 viewBox="0 0 24 24" 
                 fill="none" 
                 stroke="currentColor" 
-                strokeWidth="2" 
+                strokeWidth="3" 
                 strokeLinecap="round" 
                 strokeLinejoin="round"
                 className="w-6 h-6"
@@ -175,8 +220,8 @@ const VideoSlideshow = () => {
                   key={index}
                   onClick={() => api?.scrollTo(index)}
                   className={cn(
-                    "h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-afs-orange",
-                    activeIndex === index ? "w-8 bg-afs-orange" : "w-2 bg-white/40"
+                    "h-2.5 w-2.5 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-afs-orange",
+                    activeIndex === index ? "w-8 bg-gradient-to-r from-afs-orange to-afs-red" : "bg-white/40"
                   )}
                   aria-label={`Go to slide ${index + 1}`}
                 />

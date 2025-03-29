@@ -17,47 +17,48 @@ const Index = () => {
   // Program data
   const programs = [
     {
-      title: "Elite Training Program",
-      description: "Advanced skills development for serious players looking to take their game to the professional level.",
-      level: "Advanced",
-      duration: "12 Weeks",
-      image: "/images/program-1.jpg"
-    },
-    {
-      title: "Youth Development",
+      title: "Junior Training Program",
       description: "Foundational basketball skills and fundamentals for young players just starting their basketball journey.",
       level: "Beginner",
       duration: "8 Weeks",
-      image: "/images/program-2.jpg"
+      image: "/media/junior.jpg"
     },
     {
-      title: "College Preparation",
+      title: "Sub-Junior Training Program",
       description: "Specialized training to help high school players prepare for college basketball tryouts and scholarships.",
       level: "Intermediate",
       duration: "16 Weeks",
-      image: "/images/program-3.jpg"
-    }
+      image: "/media/sub-junior.jpg"
+    },
+    {
+      title: "Senior Training Program",
+      description: "Advanced skills development for serious players looking to take their game to the professional level.",
+      level: "Advanced",
+      duration: "12 Weeks",
+      image: "/media/senior.jpg"
+    },
   ];
 
   // Coach data
   const coaches = [
     {
-      name: "Marcus Johnson",
+      name: "Ashwani Kumar Gupta",
       title: "Head Coach",
-      bio: "Former NBA player with 12 years of coaching experience. Specializes in offensive strategy and shooting mechanics.",
-      image: "/images/coach-1.jpg",
+      bio: "A Senior National Player and certified fitness expert with extensive experience in sports and coaching. Passionate about training and mentoring athletes across multiple disciplines.",
+      image: "/media/no-image.jpg",
       achievements: [
-        "NBA Champion (2010)",
-        "3x NCAA Championship Coach",
-        "Coach of the Year (2018)",
-        "Developed 14 NBA players"
+        "Senior National Player",
+        "All India University, Khelo India Games Participant",
+        "Certified Basketball Coach (NSNIS Bangalore)  ",
+        "Certified Personal and Fitness Trainer",
+        "B.P.Ed, M.P.Ed"
       ]
     },
     {
       name: "Alicia Williams",
       title: "Skills Development Coach",
       bio: "Former WNBA All-Star with expertise in player development and ball handling techniques.",
-      image: "/images/coach-2.jpg",
+      image: "/media/no-image.jpg",
       achievements: [
         "5x WNBA All-Star",
         "Olympic Gold Medalist",
@@ -69,7 +70,7 @@ const Index = () => {
       name: "David Chen",
       title: "Performance Coach",
       bio: "Certified strength and conditioning specialist who focuses on basketball-specific athletic development.",
-      image: "/images/coach-3.jpg",
+      image: "/media/no-image.jpg",
       achievements: [
         "Master's in Sports Science",
         "Trained 30+ professional athletes",
@@ -184,7 +185,7 @@ const Index = () => {
         name: "Michael Thompson",
         role: "College Player",
         text: "AFS Academy transformed my game completely. The personalized training and attention to detail helped me secure a basketball scholarship to my dream college.",
-        image: "/images/testimonial-1.jpg"
+        image: "/media/no-image.jpg"
       },
       {
         name: "Sarah Johnson",

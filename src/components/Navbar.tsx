@@ -1,14 +1,11 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, Moon, Sun } from "lucide-react";
-import { Toggle } from "@/components/ui/toggle";
-import { useTheme } from "@/hooks/useTheme";
+import { Menu, X } from "lucide-react";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -32,30 +29,6 @@ const Navbar = () => {
     { name: "Achievements", path: "/achievements" },
     { name: "Contact", path: "/contact" },
   ];
-
-  const BasketballToggle = () => (
-    <div 
-      className="cursor-pointer relative flex items-center" 
-      onClick={toggleTheme}
-      role="button"
-      aria-label="Toggle theme"
-    >
-      {theme === "light" ? (
-        <div className="relative w-6 h-6 flex items-center justify-center">
-          <img 
-            src="/lovable-uploads/0197b276-8654-40f8-8886-d1b0957d3a23.png"
-            alt="Basketball"
-            className="w-full h-full"
-          />
-        </div>
-      ) : (
-        <div className="relative w-6 h-6 flex items-center justify-center">
-          <div className="absolute inset-0 rounded-full border-2 border-afs-orange animate-pulse-soft"></div>
-          <div className="w-5 h-5 rounded-full bg-afs-orange animate-ball-bounce"></div>
-        </div>
-      )}
-    </div>
-  );
 
   return (
     <nav
@@ -93,8 +66,6 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            {/* Theme Toggle */}
-            <BasketballToggle />
             <Link to="/login" className="btn-primary">
               Login
             </Link>
@@ -127,10 +98,6 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
-            <div className="flex items-center justify-between py-2 border-b border-white/10">
-              <span className="text-white font-montserrat font-semibold">Theme</span>
-              <BasketballToggle />
-            </div>
             <Link
               to="/login"
               className="btn-primary text-center"

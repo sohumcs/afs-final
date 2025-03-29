@@ -40,6 +40,37 @@ const VideoSlideshow = () => {
   const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
+  const carouselRef = useRef<HTMLDivElement>(null);
+
+  // Initialize Intersection Observer for autoplay when scrolled into view
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const videoIndex = parseInt(entry.target.getAttribute('data-video-index') || '0');
+            if (videoRefs.current[videoIndex]) {
+              videoRefs.current[videoIndex]?.play().catch(e => console.log("Autoplay prevented:", e));
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    videoRefs.current.forEach((video, index) => {
+      if (video) {
+        video.setAttribute('data-video-index', index.toString());
+        observer.observe(video);
+      }
+    });
+
+    return () => {
+      videoRefs.current.forEach(video => {
+        if (video) observer.unobserve(video);
+      });
+    };
+  }, []);
 
   // Handle video playback on slide change
   useEffect(() => {
@@ -66,7 +97,7 @@ const VideoSlideshow = () => {
     return () => {
       api.off("select", handleSelect);
     };
-  }, [api]); // Fixed: Added api as dependency
+  }, [api]);
 
   // Initialize video event listeners for seamless looping
   useEffect(() => {
@@ -107,7 +138,7 @@ const VideoSlideshow = () => {
           </p>
         </div>
         
-        <div className="relative group">
+        <div className="relative group" ref={carouselRef}>
           <Carousel
             className="w-full"
             setApi={setApi}
@@ -142,6 +173,7 @@ const VideoSlideshow = () => {
                           muted
                           playsInline
                           preload="auto"
+                          autoPlay={index === 0} // Autoplay first video initially
                           onEnded={(e) => {
                             e.currentTarget.currentTime = 0;
                             e.currentTarget.play();

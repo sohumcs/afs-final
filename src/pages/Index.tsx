@@ -281,19 +281,14 @@ const Index = () => {
             </div>
             
             <div className="relative reveal">
-              <div className="aspect-[4/3] rounded-xl overflow-hidden glass-card">
+              <div className="rounded-xl overflow-hidden glass-card">
                 <img 
-                  src="/images/about-academy.jpg" 
+                  src="media/elevate.jpg" 
                   alt="AFS Academy Training" 
                   className="w-full h-full object-cover" 
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 w-32 h-32 bg-gradient-to-r from-afs-orange to-afs-red rounded-lg border border-white/20 flex items-center justify-center p-4 shadow-xl">
-                <div className="text-center">
-                  <div className="text-2xl font-russo">100%</div>
-                  <div className="text-xs">Commitment to Excellence</div>
-                </div>
-              </div>
+              
               <div className="absolute -top-4 -right-4 w-16 h-16 rounded-full flex items-center justify-center bg-afs-dark border-2 border-afs-orange">
                 <CircleDot className="text-afs-orange animate-ball-bounce" size={28} />
               </div>

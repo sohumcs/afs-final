@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -24,6 +25,13 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 221.2 83.2% 53.3%;
     --radius: 0.5rem;
+
+    /* Custom AFS Light Mode Colors */
+    --afs-dark: #2a2a2a;
+    --afs-dark-accent: #3a3a3a;
+    --afs-dark-rgb: 42, 42, 42;
+    --afs-orange: #FF5722;
+    --afs-red: #F72119;
   }
 
   .dark {
@@ -46,6 +54,13 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
+
+    /* Custom AFS Dark Mode Colors */
+    --afs-dark: #121212;
+    --afs-dark-accent: #1e1e1e;
+    --afs-dark-rgb: 18, 18, 18;
+    --afs-orange: #FF5722;
+    --afs-red: #F72119;
   }
 }
 
@@ -59,19 +74,6 @@
   h1, h2, h3, h4, h5, h6 {
     @apply font-russo;
   }
-}
-
-/* Custom AFS colors */
-:root {
-  --afs-dark: #121212;
-  --afs-dark-accent: #1e1e1e;
-  --afs-orange: #FF5722;
-  --afs-red: #F72119;
-}
-
-.dark {
-  --afs-dark: #080808;
-  --afs-dark-accent: #121212;
 }
 
 .bg-afs-dark {
@@ -122,16 +124,28 @@
   animation: fadeIn 0.6s ease-out forwards;
 }
 
+/* Video Carousel Styles - NEW */
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 0.8; }
+  50% { transform: scale(1.03); opacity: 1; }
+}
+
+.animate-pulse-soft {
+  animation: pulse-soft 4s infinite ease-in-out;
+}
+
 /* Buttons */
 .btn-primary {
-  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red text-white font-bold py-3 px-6 rounded-lg 
+  @apply inline-flex items-center gap-2 bg-gradient-to-r from-afs-orange to-afs-red font-bold py-3 px-6 rounded-lg 
   hover:from-afs-orange/90 hover:to-afs-red/90 transition-all shadow-lg hover:shadow-xl 
   hover:translate-y-[-2px] active:translate-y-0 active:shadow-lg;
+  color: white;
 }
 
 .btn-secondary {
-  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white font-bold py-3 px-6 rounded-lg 
+  @apply inline-flex items-center gap-2 bg-white/10 border border-white/20 font-bold py-3 px-6 rounded-lg 
   hover:bg-white/15 transition-all;
+  color: white;
 }
 
 /* Cards */
@@ -191,4 +205,49 @@
   .afs-heading {
     @apply text-4xl;
   }
+}
+
+/* Light mode specific styles */
+.light {
+  background-color: #f5f5f7;
+}
+
+.light .bg-afs-dark {
+  background-color: #ffffff;
+}
+
+.light .bg-afs-dark-accent {
+  background-color: #f5f5f7;
+}
+
+.light .glass-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light .btn-secondary {
+  background-color: rgba(255, 87, 34, 0.1);
+  border-color: rgba(255, 87, 34, 0.2);
+  color: #2a2a2a;
+}
+
+.light .btn-secondary:hover {
+  background-color: rgba(255, 87, 34, 0.15);
+}
+
+/* Fix for circular dependency */
+.light .text-white {
+  color: #2a2a2a;
+}
+
+.light .text-white\/70 {
+  color: rgba(42, 42, 42, 0.7);
+}
+
+.light .text-white\/80 {
+  color: rgba(42, 42, 42, 0.8);
+}
+
+.light .basketball-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 A50 50 0 0 1 100 50 A50 50 0 0 1 50 100 A50 50 0 0 1 0 50 A50 50 0 0 1 50 0' fill='none' stroke='rgba(255,87,34,0.2)' stroke-width='1'/%3E%3Cpath d='M0,50 C25,30 75,30 100,50 C75,70 25,70 0,50 M50,0 C30,25 30,75 50,100 C70,75 70,25 50,0' fill='none' stroke='rgba(255,87,34,0.2)' stroke-width='1'/%3E%3C/svg%3E");
 }

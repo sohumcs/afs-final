@@ -1,3 +1,5 @@
 
-# This file ensures the videos directory is tracked by Git
-# Replace this folder with actual videos
+# This directory can contain video files for the carousel
+# Currently using remote videos from mixkit for sample purposes
+# Replace with actual videos when ready for production
+

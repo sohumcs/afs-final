@@ -3,10 +3,11 @@ import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { HoverCard, HoverCardContent, HoverCardTrigger } from "@/components/ui/hover-card";
-import { Trophy, Award, Star, Users } from "lucide-react";
+import { Trophy, Award, Star, Users, ChevronDown, ChevronUp } from "lucide-react";
 
 const Coaches = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [showAllCoaches, setShowAllCoaches] = useState(false);
   
   useEffect(() => {
     // Make elements visible immediately on component mount
@@ -36,6 +37,11 @@ const Coaches = () => {
       });
     };
   }, []);
+
+  // Toggle showing all coaches
+  const toggleShowAllCoaches = () => {
+    setShowAllCoaches(prev => !prev);
+  };
 
   const coaches = [
     {
@@ -77,8 +83,91 @@ const Coaches = () => {
       specialties: ["Strength Training", "Injury Prevention", "Athletic Performance"],
       image: "/images/coach-marcus.jpg",
       achievements: ["Certified Strength & Conditioning Specialist", "Master's in Sports Science"]
+    },
+    {
+      id: 5,
+      name: "Jennifer Lopez",
+      role: "Defense Specialist",
+      bio: "Former collegiate defensive player of the year with expertise in teaching lockdown defensive techniques and team defensive strategies.",
+      experience: "9 years",
+      specialties: ["Defensive Footwork", "Positioning", "Team Defense"],
+      image: "/images/coach-jen.jpg",
+      achievements: ["Defensive Coach of the Year (2017)", "NCAA Final Four Coach"]
+    },
+    {
+      id: 6,
+      name: "Robert Williams",
+      role: "Performance Analytics",
+      bio: "Sports analytics expert who combines data analysis with practical basketball training to optimize player development.",
+      experience: "7 years",
+      specialties: ["Data Analysis", "Performance Metrics", "Skill Optimization"],
+      image: "/images/coach-robert.jpg",
+      achievements: ["Sports Analytics Innovation Award", "Published Basketball Researcher"]
+    },
+    {
+      id: 7,
+      name: "Maria Rodriguez",
+      role: "Mental Performance Coach",
+      bio: "Sports psychologist specializing in basketball mental performance, focus training, and competitive mindset development.",
+      experience: "11 years",
+      specialties: ["Mental Toughness", "Focus Training", "Game Preparation"],
+      image: "/images/coach-maria.jpg",
+      achievements: ["Sports Psychology Certification", "Author of 'Mind of a Champion'"]
+    },
+    {
+      id: 8,
+      name: "James Wilson",
+      role: "Ball Handling Specialist",
+      bio: "Former streetball champion known for incredible ball handling skills, now teaching advanced dribbling and ball control techniques.",
+      experience: "14 years",
+      specialties: ["Advanced Dribbling", "Ball Control", "Creativity Development"],
+      image: "/images/coach-james.jpg",
+      achievements: ["Streetball World Champion", "Global Basketball Camp Director"]
+    },
+    {
+      id: 9,
+      name: "Kimberly Taylor",
+      role: "Transition Game Coach",
+      bio: "Expert in fast break offense and transition defense with experience coaching at the professional level overseas.",
+      experience: "13 years",
+      specialties: ["Fast Break Offense", "Transition Defense", "Tempo Control"],
+      image: "/images/coach-kim.jpg",
+      achievements: ["European Championship Assistant Coach", "Fast Break Strategy Innovator"]
+    },
+    {
+      id: 10,
+      name: "Thomas Jackson",
+      role: "Post Play Development",
+      bio: "Former professional center who specializes in teaching post moves, footwork, and inside scoring techniques.",
+      experience: "16 years",
+      specialties: ["Post Moves", "Footwork", "Inside Scoring"],
+      image: "/images/coach-thomas.jpg",
+      achievements: ["All-Star Center (2005-2008)", "Post Play Development Specialist"]
+    },
+    {
+      id: 11,
+      name: "Lisa Brown",
+      role: "Shooting Coach",
+      bio: "Three-point specialist with a perfect shooting form, now teaching advanced shooting mechanics and consistency training.",
+      experience: "10 years",
+      specialties: ["Shooting Form", "Three-Point Shooting", "Free Throws"],
+      image: "/images/coach-lisa.jpg",
+      achievements: ["Shooting Percentage Record Holder", "Shooting Clinic Director"]
+    },
+    {
+      id: 12,
+      name: "Carlos Mendez",
+      role: "International Skills Coach",
+      bio: "Brings global basketball perspective having played professionally in Europe, Asia and South America, specializing in international style of play.",
+      experience: "12 years",
+      specialties: ["International Tactics", "Global Playing Styles", "Versatility Training"],
+      image: "/images/coach-carlos.jpg",
+      achievements: ["International Champions Coach", "Global Basketball Ambassador"]
     }
   ];
+  
+  // Show only the first 4 coaches initially, unless showAllCoaches is true
+  const displayedCoaches = showAllCoaches ? coaches : coaches.slice(0, 4);
 
   return (
     <div className="min-h-screen bg-afs-dark text-white flex flex-col">
@@ -102,8 +191,8 @@ const Coaches = () => {
             </p>
           </div>
           
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-20">
-            {coaches.map((coach) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-16 mb-10">
+            {displayedCoaches.map((coach) => (
               <HoverCard key={coach.id} openDelay={100} closeDelay={100}>
                 <HoverCardTrigger asChild>
                   <div className={`card-hover glass-card overflow-hidden rounded-xl animate-fade-in relative cursor-pointer reveal ${isVisible ? 'animated' : ''}`}>
@@ -161,6 +250,24 @@ const Coaches = () => {
                 </HoverCardContent>
               </HoverCard>
             ))}
+          </div>
+          
+          {/* View More / View Less Button */}
+          <div className={`flex justify-center mb-16 reveal ${isVisible ? 'animated' : ''}`}>
+            <button 
+              onClick={toggleShowAllCoaches}
+              className="btn-secondary flex items-center gap-2 transition-all duration-300"
+            >
+              {showAllCoaches ? (
+                <>
+                  View Less <ChevronUp size={20} />
+                </>
+              ) : (
+                <>
+                  View More <ChevronDown size={20} />
+                </>
+              )}
+            </button>
           </div>
           
           <div className={`max-w-3xl mx-auto text-center reveal ${isVisible ? 'animated' : ''}`}>

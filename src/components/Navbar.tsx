@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, CircleDot, Moon, Sun } from "lucide-react";
@@ -30,7 +29,6 @@ const Navbar = () => {
     { name: "Programs", path: "/programs" },
     { name: "Coaches", path: "/coaches" },
     { name: "Achievements", path: "/achievements" },
-    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -77,8 +75,8 @@ const Navbar = () => {
               />
               <Moon size={18} className="text-white opacity-80" />
             </div>
-            <Link to="/login" className="btn-primary">
-              Login
+            <Link to="/contact" className="btn-primary">
+              Contact Us
             </Link>
           </div>
 
@@ -109,6 +107,13 @@ const Navbar = () => {
                 {link.name}
               </Link>
             ))}
+            <Link
+              to="/contact"
+              className="text-white hover:text-afs-orange py-2 border-b border-white/10 font-montserrat font-semibold"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact Us
+            </Link>
             <div className="flex items-center justify-between py-2 border-b border-white/10">
               <span className="text-white font-montserrat font-semibold">Dark Mode</span>
               <div className="flex items-center gap-2">
@@ -121,13 +126,6 @@ const Navbar = () => {
                 <Moon size={16} className="text-white opacity-80" />
               </div>
             </div>
-            <Link
-              to="/login"
-              className="btn-primary text-center"
-              onClick={() => setIsOpen(false)}
-            >
-              Login
-            </Link>
           </div>
         </div>
       </div>

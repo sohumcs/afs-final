@@ -18,34 +18,39 @@ const Achievements = () => {
   
   const achievements = [
     {
-      id: 1,
-      year: 2023,
-      title: "National Youth Championship",
-      description: "Our U-16 team won the National Youth Championship with an undefeated season.",
-      image: "/images/achievement-1.jpg",
-      category: "Team Championship"
-    },
+        id: 1,
+        year: 2023,
+        title: "Organized State-Level League",
+        description: (
+          <ul className="list-disc pl-5 space-y-1">
+            <li>AFS Basketball League: 110 teams from across Uttar Pradesh participated</li>
+            <li>Featured many international and national players</li>
+          </ul>
+        ),
+        image: "/images/achievement-1.jpg", 
+        category: "Team Championship"
+    },  
     {
       id: 2,
       year: 2022,
-      title: "Division 1 College Placements",
-      description: "15 of our graduates received Division 1 college basketball scholarships this year.",
+      title: "Promoting Fitness Awareness",
+      description: "Conducted sports meets, events, and basketball tournaments at district and state levels to spread fitness awareness in the community",
       image: "/images/achievement-2.jpg",
       category: "Player Development"
     },
     {
       id: 3,
       year: 2022,
-      title: "Coach of the Year Award",
-      description: "Head Coach Michael Thompson received the Regional Coach of the Year award.",
+      title: "Sponsorship Initiatives",
+      description: "Sponsored T-shirts and jerseys for state teams.",
       image: "/images/achievement-3.jpg",
       category: "Coaching Excellence"
     },
     {
       id: 4,
       year: 2021,
-      title: "State Tournament Finals",
-      description: "Our U-18 team reached the State Tournament Finals, showcasing exceptional skill and teamwork.",
+      title: "Sports Partnership",
+      description: "Partnered with Decathlon for the State Basketball League. ",
       image: "/images/achievement-4.jpg",
       category: "Team Achievement"
     },

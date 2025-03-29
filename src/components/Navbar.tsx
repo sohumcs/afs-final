@@ -2,7 +2,7 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Menu, X, CircleDot, Moon, Sun } from "lucide-react";
-import { Switch } from "@/components/ui/switch";
+import { Toggle } from "@/components/ui/toggle";
 import { useTheme } from "@/hooks/useTheme";
 
 const Navbar = () => {
@@ -32,6 +32,23 @@ const Navbar = () => {
     { name: "Achievements", path: "/achievements" },
     { name: "Contact", path: "/contact" },
   ];
+
+  const BasketballToggle = () => (
+    <div 
+      className="cursor-pointer relative flex items-center" 
+      onClick={toggleTheme}
+      role="button"
+      aria-label="Toggle theme"
+    >
+      {theme === "light" ? (
+        <Sun className="text-afs-dark h-6 w-6" />
+      ) : (
+        <div className="relative">
+          <CircleDot className="text-afs-orange h-6 w-6 animate-ball-bounce" />
+        </div>
+      )}
+    </div>
+  );
 
   return (
     <nav
@@ -68,15 +85,7 @@ const Navbar = () => {
 
           <div className="hidden md:flex items-center gap-4">
             {/* Theme Toggle */}
-            <div className="flex items-center gap-2">
-              <Sun size={18} className="text-white opacity-80" />
-              <Switch 
-                checked={theme === "dark"} 
-                onCheckedChange={toggleTheme}
-                className="data-[state=checked]:bg-afs-orange"
-              />
-              <Moon size={18} className="text-white opacity-80" />
-            </div>
+            <BasketballToggle />
             <Link to="/login" className="btn-primary">
               Login
             </Link>
@@ -94,7 +103,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Menu */}
         <div
-          className={`md:hidden absolute left-0 right-0 p-4 mt-2 bg-afs-dark/95 backdrop-blur-lg shadow-lg transition-transform duration-300 ease-in-out dark:bg-black/90 ${
+          className={`md:hidden fixed left-0 right-0 top-[56px] p-4 mt-2 bg-afs-dark/95 backdrop-blur-lg shadow-lg transition-transform duration-300 ease-in-out dark:bg-black/90 ${
             isOpen ? "translate-y-0 opacity-100" : "translate-y-[-100%] opacity-0 pointer-events-none"
           }`}
         >
@@ -110,16 +119,8 @@ const Navbar = () => {
               </Link>
             ))}
             <div className="flex items-center justify-between py-2 border-b border-white/10">
-              <span className="text-white font-montserrat font-semibold">Dark Mode</span>
-              <div className="flex items-center gap-2">
-                <Sun size={16} className="text-white opacity-80" />
-                <Switch 
-                  checked={theme === "dark"} 
-                  onCheckedChange={toggleTheme}
-                  className="data-[state=checked]:bg-afs-orange"
-                />
-                <Moon size={16} className="text-white opacity-80" />
-              </div>
+              <span className="text-white font-montserrat font-semibold">Theme</span>
+              <BasketballToggle />
             </div>
             <Link
               to="/login"

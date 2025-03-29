@@ -1,6 +1,5 @@
 
-import { useState } from "react";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useState, useEffect } from "react";
 import { 
   Carousel, 
   CarouselContent, 
@@ -41,9 +40,14 @@ const videoData = [
 const VideoSlideshow = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
+  // Handle carousel item selection
+  const handleSelect = (index: number) => {
+    setActiveIndex(index);
+  };
+
   return (
-    <section className="relative py-10 bg-afs-dark-accent overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-r from-afs-dark/70 to-afs-dark/70 z-0"></div>
+    <section className="relative py-10 bg-afs-dark-accent overflow-hidden dark:bg-black/50">
+      <div className="absolute inset-0 bg-gradient-to-r from-afs-dark/70 to-afs-dark/70 z-0 dark:from-black/70 dark:to-black/70"></div>
       <div className="basketball-pattern absolute inset-0 opacity-15 z-0"></div>
       
       <div className="container mx-auto px-4 relative z-10">
@@ -59,7 +63,11 @@ const VideoSlideshow = () => {
         <div className="relative">
           <Carousel
             className="w-full"
-            onSelect={(idx) => setActiveIndex(idx)}
+            opts={{
+              loop: true,
+              align: "center"
+            }}
+            onSelect={handleSelect}
           >
             <CarouselContent className="-ml-2 md:-ml-4">
               {videoData.map((video, index) => (

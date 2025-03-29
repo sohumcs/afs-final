@@ -1,19 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { 
   Carousel, 
   CarouselContent, 
   CarouselItem, 
   CarouselNext, 
-  CarouselPrevious 
+  CarouselPrevious,
+  type CarouselApi
 } from "@/components/ui/carousel";
 import { cn } from "@/lib/utils";
 
-// Sample video data
 const videoData = [
   {
     id: 1,
     src: "/videos/training-1.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png", // Using the provided image as fallback poster
+    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
     title: "Training Session 1"
   },
   {
@@ -37,11 +37,20 @@ const videoData = [
 ];
 
 const VideoSlideshow = () => {
+  const [api, setApi] = useState<CarouselApi>();
   const [activeIndex, setActiveIndex] = useState(0);
 
-  // Handle carousel item selection
-  const handleSelect = (index: number) => {
-    setActiveIndex(index);
+  const handleSelect = () => {
+    if (!api) return;
+    setActiveIndex(api.selectedScrollSnap());
+  };
+
+  const setupCarousel = (carouselApi: CarouselApi) => {
+    setApi(carouselApi);
+    carouselApi.on("select", handleSelect);
+    return () => {
+      carouselApi.off("select", handleSelect);
+    };
   };
 
   return (
@@ -59,63 +68,124 @@ const VideoSlideshow = () => {
           </p>
         </div>
         
-        <div className="relative">
+        <div className="relative group">
           <Carousel
             className="w-full"
+            setApi={setupCarousel}
             opts={{
               loop: true,
               align: "center"
             }}
-            onSelect={handleSelect}
           >
-            <CarouselContent className="-ml-2 md:-ml-4">
+            <CarouselContent className="ml-0">
               {videoData.map((video, index) => (
                 <CarouselItem 
                   key={video.id} 
-                  className="pl-2 md:pl-4 md:basis-1/1 lg:basis-2/3 transition-all duration-300"
+                  className="basis-full lg:basis-2/3 px-1 md:px-2"
                 >
                   <div className={cn(
-                    "relative rounded-xl overflow-hidden transition-all duration-500",
+                    "relative transition-all duration-500",
                     activeIndex === index 
                       ? "opacity-100 scale-100 z-20"
                       : "opacity-70 scale-95 blur-[1px] z-10"
                   )}>
-                    <video
-                      src={video.src}
-                      poster={video.poster}
-                      className="w-full h-full object-cover aspect-video"
-                      loop
-                      muted
-                      autoPlay
-                      playsInline
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 w-full p-4 text-left">
-                      <h3 className="text-white font-russo text-lg">{video.title}</h3>
+                    <div className={cn(
+                      "p-[2px] rounded-xl",
+                      activeIndex === index ? "bg-afs-orange" : "bg-transparent"
+                    )}>
+                      <div className="rounded-lg overflow-hidden w-full h-full">
+                        <video
+                          src={video.src}
+                          poster={video.poster}
+                          className="w-full h-full object-cover aspect-video"
+                          loop
+                          muted
+                          autoPlay={activeIndex === index}
+                          playsInline
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
+                        <div className="absolute bottom-0 left-0 w-full p-4 text-left">
+                          <h3 className="text-white font-russo text-lg">{video.title}</h3>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </CarouselItem>
               ))}
             </CarouselContent>
-            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 border-white/20 backdrop-blur-sm text-white hover:bg-white/20 h-10 w-10" />
-            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 border-white/20 backdrop-blur-sm text-white hover:bg-white/20 h-10 w-10" />
+
+            {/* Enhanced Previous Arrow */}
+            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 z-30 
+              h-12 w-12 rounded-full bg-white/10 backdrop-blur-lg border-2 border-afs-orange/30
+              text-afs-orange hover:bg-afs-orange/20 hover:border-afs-orange/60
+              transition-all duration-300 shadow-lg hover:shadow-afs-orange/30
+              flex items-center justify-center
+              group-hover:opacity-100 opacity-0 md:opacity-100
+              hover:scale-110 transform-gpu
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-afs-orange">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="w-6 h-6"
+              >
+                <path d="M15 18l-6-6 6-6"/>
+              </svg>
+              <span className="sr-only">Previous slide</span>
+            </CarouselPrevious>
+            
+            {/* Enhanced Next Arrow */}
+            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 z-30
+              h-12 w-12 rounded-full bg-white/10 backdrop-blur-lg border-2 border-afs-orange/30
+              text-afs-orange hover:bg-afs-orange/20 hover:border-afs-orange/60
+              transition-all duration-300 shadow-lg hover:shadow-afs-orange/30
+              flex items-center justify-center
+              group-hover:opacity-100 opacity-0 md:opacity-100
+              hover:scale-110 transform-gpu
+              focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-afs-orange">
+              <svg 
+                xmlns="http://www.w3.org/2000/svg" 
+                width="24" 
+                height="24" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round"
+                className="w-6 h-6"
+              >
+                <path d="M9 18l6-6-6-6"/>
+              </svg>
+              <span className="sr-only">Next slide</span>
+            </CarouselNext>
           </Carousel>
           
-          <div className="hidden md:flex justify-center absolute -bottom-6 left-1/2 transform -translate-x-1/2 space-x-2 z-20">
-            {videoData.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300",
-                  activeIndex === index ? "w-8 bg-afs-orange" : "w-2 bg-white/40"
-                )}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+          {/* Navigation dots */}
+          <div className="w-full flex justify-center mt-6 md:mt-8 md:absolute md:bottom-4 left-0 right-0 mx-auto">
+            <div className="flex space-x-2 z-20 px-4 bg-afs-dark-accent/50 md:bg-transparent rounded-full py-2 md:py-0">
+              {videoData.map((_, index) => (
+                <button
+                  key={index}
+                  onClick={() => api?.scrollTo(index)}
+                  className={cn(
+                    "h-2 rounded-full transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-afs-orange",
+                    activeIndex === index ? "w-8 bg-afs-orange" : "w-2 bg-white/40"
+                  )}
+                  aria-label={`Go to slide ${index + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </section>  
   );
 };
 

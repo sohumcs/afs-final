@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Menu, X, CircleDot, Moon, Sun } from "lucide-react";
+import { Menu, X, Moon, Sun } from "lucide-react";
 import { Toggle } from "@/components/ui/toggle";
 import { useTheme } from "@/hooks/useTheme";
 
@@ -41,10 +41,17 @@ const Navbar = () => {
       aria-label="Toggle theme"
     >
       {theme === "light" ? (
-        <Sun className="h-6 w-6 text-afs-dark" />
+        <div className="relative w-6 h-6 flex items-center justify-center">
+          <img 
+            src="/lovable-uploads/0197b276-8654-40f8-8886-d1b0957d3a23.png"
+            alt="Basketball"
+            className="w-full h-full"
+          />
+        </div>
       ) : (
-        <div className="relative">
-          <CircleDot className="text-afs-orange h-6 w-6 animate-ball-bounce" />
+        <div className="relative w-6 h-6 flex items-center justify-center">
+          <div className="absolute inset-0 rounded-full border-2 border-afs-orange animate-pulse-soft"></div>
+          <div className="w-5 h-5 rounded-full bg-afs-orange animate-ball-bounce"></div>
         </div>
       )}
     </div>
@@ -64,7 +71,9 @@ const Navbar = () => {
             to="/"
             className="flex items-center"
           >
-            <CircleDot className="text-afs-orange mr-2 animate-ball-bounce" size={28} />
+            <div className="text-afs-orange mr-2 w-7 h-7 flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full bg-afs-orange animate-ball-bounce"></div>
+            </div>
             <span className="text-2xl font-russo tracking-tight text-white">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">AFS</span> Academy
             </span>

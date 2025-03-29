@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -26,8 +27,9 @@
     --radius: 0.5rem;
 
     /* Custom AFS Light Mode Colors */
-    --afs-dark: #f8f8f8;
-    --afs-dark-accent: #efefef;
+    --afs-dark: #2a2a2a;
+    --afs-dark-accent: #3a3a3a;
+    --afs-dark-rgb: 42, 42, 42;
     --afs-orange: #FF5722;
     --afs-red: #F72119;
   }
@@ -56,6 +58,7 @@
     /* Custom AFS Dark Mode Colors */
     --afs-dark: #121212;
     --afs-dark-accent: #1e1e1e;
+    --afs-dark-rgb: 18, 18, 18;
     --afs-orange: #FF5722;
     --afs-red: #F72119;
   }
@@ -205,21 +208,46 @@
 }
 
 /* Light mode specific styles */
+.light {
+  background-color: #f5f5f7;
+}
+
+.light .bg-afs-dark {
+  background-color: #ffffff;
+}
+
+.light .bg-afs-dark-accent {
+  background-color: #f5f5f7;
+}
+
+.light .glass-card {
+  background-color: rgba(255, 255, 255, 0.8);
+  border-color: rgba(0, 0, 0, 0.1);
+}
+
 .light .btn-secondary {
-  background-color: rgba(var(--afs-dark-rgb), 0.1);
-  border-color: rgba(var(--afs-dark-rgb), 0.2);
-  color: var(--afs-dark);
+  background-color: rgba(255, 87, 34, 0.1);
+  border-color: rgba(255, 87, 34, 0.2);
+  color: #2a2a2a;
 }
 
 .light .btn-secondary:hover {
-  background-color: rgba(var(--afs-dark-rgb), 0.15);
+  background-color: rgba(255, 87, 34, 0.15);
 }
 
 /* Fix for circular dependency */
 .light .text-white {
-  color: var(--afs-dark);
+  color: #2a2a2a;
 }
 
 .light .text-white\/70 {
-  color: rgba(var(--afs-dark-rgb), 0.7);
+  color: rgba(42, 42, 42, 0.7);
+}
+
+.light .text-white\/80 {
+  color: rgba(42, 42, 42, 0.8);
+}
+
+.light .basketball-pattern {
+  background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 0 A50 50 0 0 1 100 50 A50 50 0 0 1 50 100 A50 50 0 0 1 0 50 A50 50 0 0 1 50 0' fill='none' stroke='rgba(255,87,34,0.2)' stroke-width='1'/%3E%3Cpath d='M0,50 C25,30 75,30 100,50 C75,70 25,70 0,50 M50,0 C30,25 30,75 50,100 C70,75 70,25 50,0' fill='none' stroke='rgba(255,87,34,0.2)' stroke-width='1'/%3E%3C/svg%3E");
 }

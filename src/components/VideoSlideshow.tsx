@@ -1,122 +1,187 @@
 
-import { useState, useEffect } from "react";
-import { 
-  Carousel, 
-  CarouselContent, 
-  CarouselItem, 
-  CarouselNext, 
-  CarouselPrevious 
-} from "@/components/ui/carousel";
-import { cn } from "@/lib/utils";
-
-// Sample video data
-const videoData = [
-  {
-    id: 1,
-    src: "/videos/training-1.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png", // Using the provided image as fallback poster
-    title: "Training Session 1"
-  },
-  {
-    id: 2,
-    src: "/videos/training-2.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png", 
-    title: "Training Session 2"
-  },
-  {
-    id: 3,
-    src: "/videos/training-3.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
-    title: "Training Session 3"
-  },
-  {
-    id: 4,
-    src: "/videos/training-4.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
-    title: "Training Session 4"
-  }
-];
+import { useState, useEffect, useRef } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 const VideoSlideshow = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(1); // Start with middle video active
+  const videoContainerRef = useRef<HTMLDivElement>(null);
+  const autoplayIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Handle carousel item selection
-  const handleSelect = (index: number) => {
+  // Define video sources
+  const videos = [
+    { 
+      id: 1,
+      src: "/videos/basketball-game-1.mp4",
+      title: "Championship Finals",
+      description: "Highlights from our team's championship victory"
+    },
+    { 
+      id: 2,
+      src: "/videos/basketball-training.mp4", 
+      title: "Elite Training Session",
+      description: "Advanced drills from our elite development program"
+    },
+    { 
+      id: 3,
+      src: "/videos/basketball-game-2.mp4",
+      title: "Summer Tournament",
+      description: "Action from the annual summer showcase event"
+    }
+  ];
+
+  // Handle autoplay functionality
+  useEffect(() => {
+    // Start autoplay
+    autoplayIntervalRef.current = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % videos.length);
+    }, 5000);
+
+    // Clear interval on unmount
+    return () => {
+      if (autoplayIntervalRef.current) {
+        clearInterval(autoplayIntervalRef.current);
+      }
+    };
+  }, [videos.length]);
+
+  // Pause autoplay when user interacts
+  const pauseAutoplay = () => {
+    if (autoplayIntervalRef.current) {
+      clearInterval(autoplayIntervalRef.current);
+    }
+  };
+
+  // Resume autoplay after user interaction
+  const resumeAutoplay = () => {
+    pauseAutoplay();
+    autoplayIntervalRef.current = setInterval(() => {
+      setActiveIndex(prev => (prev + 1) % videos.length);
+    }, 5000);
+  };
+
+  // Navigation functions
+  const goToPrevious = () => {
+    pauseAutoplay();
+    setActiveIndex(prev => (prev === 0 ? videos.length - 1 : prev - 1));
+    resumeAutoplay();
+  };
+
+  const goToNext = () => {
+    pauseAutoplay();
+    setActiveIndex(prev => (prev + 1) % videos.length);
+    resumeAutoplay();
+  };
+
+  const goToSlide = (index: number) => {
+    pauseAutoplay();
     setActiveIndex(index);
+    resumeAutoplay();
+  };
+
+  // Fix the TypeScript error by using an appropriate event handler
+  const handleDotClick = (index: number) => (event: React.MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    goToSlide(index);
   };
 
   return (
-    <section className="relative py-10 bg-afs-dark-accent overflow-hidden dark:bg-black/50">
-      <div className="absolute inset-0 bg-gradient-to-r from-afs-dark/70 to-afs-dark/70 z-0 dark:from-black/70 dark:to-black/70"></div>
-      <div className="basketball-pattern absolute inset-0 opacity-15 z-0"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="text-center mb-10 reveal animate-fade-in">
-          <h2 className="text-3xl md:text-4xl font-russo mb-3">
-            <span className="text-white">Featured</span> <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">Training Sessions</span>
+    <div className="py-8 bg-afs-dark overflow-hidden relative">
+      <div className="container mx-auto px-4">
+        <div className="flex justify-between items-center mb-6">
+          <h2 className="text-2xl md:text-3xl font-bold text-white font-russo flex items-center">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">Featured</span>&nbsp;Events
           </h2>
-          <p className="text-white/70 max-w-2xl mx-auto">
-            Get a glimpse of our specialized training sessions designed to improve your basketball skills
-          </p>
-        </div>
-        
-        <div className="relative">
-          <Carousel
-            className="w-full"
-            opts={{
-              loop: true,
-              align: "center"
-            }}
-            onSelect={handleSelect}
-          >
-            <CarouselContent className="-ml-2 md:-ml-4">
-              {videoData.map((video, index) => (
-                <CarouselItem 
-                  key={video.id} 
-                  className="pl-2 md:pl-4 md:basis-1/1 lg:basis-2/3 transition-all duration-300"
-                >
-                  <div className={cn(
-                    "relative rounded-xl overflow-hidden transition-all duration-500",
-                    activeIndex === index 
-                      ? "opacity-100 scale-100 z-20"
-                      : "opacity-70 scale-95 blur-[1px] z-10"
-                  )}>
-                    <video
-                      src={video.src}
-                      poster={video.poster}
-                      className="w-full h-full object-cover aspect-video"
-                      loop
-                      muted
-                      autoPlay
-                      playsInline
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent"></div>
-                    <div className="absolute bottom-0 left-0 w-full p-4 text-left">
-                      <h3 className="text-white font-russo text-lg">{video.title}</h3>
-                    </div>
-                  </div>
-                </CarouselItem>
-              ))}
-            </CarouselContent>
-            <CarouselPrevious className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/10 border-white/20 backdrop-blur-sm text-white hover:bg-white/20 h-10 w-10" />
-            <CarouselNext className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/10 border-white/20 backdrop-blur-sm text-white hover:bg-white/20 h-10 w-10" />
-          </Carousel>
-          
-          <div className="hidden md:flex justify-center absolute -bottom-6 left-1/2 transform -translate-x-1/2 space-x-2 z-20">
-            {videoData.map((_, index) => (
-              <button
-                key={index}
-                className={cn(
-                  "h-2 rounded-full transition-all duration-300",
-                  activeIndex === index ? "w-8 bg-afs-orange" : "w-2 bg-white/40"
-                )}
-                aria-label={`Go to slide ${index + 1}`}
-              />
-            ))}
+          <div className="hidden sm:flex items-center gap-2">
+            <button 
+              onClick={goToPrevious} 
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all text-white"
+              aria-label="Previous video"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button 
+              onClick={goToNext} 
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all text-white"
+              aria-label="Next video"
+            >
+              <ChevronRight size={20} />
+            </button>
           </div>
         </div>
+
+        <div ref={videoContainerRef} className="relative py-8 overflow-hidden">
+          <div className="flex justify-center items-center gap-4 md:gap-8">
+            {videos.map((video, index) => {
+              const isActive = index === activeIndex;
+              const isPrevious = (index === activeIndex - 1) || (activeIndex === 0 && index === videos.length - 1);
+              const isNext = (index === activeIndex + 1) || (activeIndex === videos.length - 1 && index === 0);
+              
+              return (
+                <div 
+                  key={video.id}
+                  className={`video-slide transition-all duration-500 relative ${
+                    isActive 
+                      ? 'z-30 w-full md:w-2/3 lg:w-1/2 scale-100 opacity-100' 
+                      : isPrevious || isNext 
+                        ? 'z-20 w-3/4 md:w-1/2 lg:w-1/3 scale-90 opacity-60'
+                        : 'z-10 hidden md:block w-1/2 lg:w-1/4 scale-80 opacity-40'
+                  }`}
+                >
+                  <div className="aspect-video relative rounded-xl overflow-hidden shadow-xl">
+                    <video 
+                      src={video.src}
+                      className={`w-full h-full object-cover ${isActive ? '' : 'blur-sm'}`}
+                      autoPlay 
+                      loop 
+                      muted 
+                    />
+                    {isActive && (
+                      <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/80 to-transparent">
+                        <h3 className="text-xl font-bold text-white mb-1">{video.title}</h3>
+                        <p className="text-white/80 text-sm">{video.description}</p>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Dots navigation */}
+        <div className="flex justify-center mt-4 gap-2">
+          {videos.map((_, index) => (
+            <div 
+              key={index}
+              onClick={handleDotClick(index)}
+              className={`w-3 h-3 rounded-full cursor-pointer transition-all ${
+                index === activeIndex 
+                  ? 'bg-afs-orange scale-125' 
+                  : 'bg-white/30 hover:bg-white/50'
+              }`}
+            />
+          ))}
+        </div>
+
+        {/* Mobile navigation */}
+        <div className="flex sm:hidden justify-center mt-6 gap-4">
+          <button 
+            onClick={goToPrevious} 
+            className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all text-white"
+            aria-label="Previous video"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button 
+            onClick={goToNext} 
+            className="w-12 h-12 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center transition-all text-white"
+            aria-label="Next video"
+          >
+            <ChevronRight size={24} />
+          </button>
+        </div>
       </div>
-    </section>
+    </div>
   );
 };
 

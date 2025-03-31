@@ -271,6 +271,7 @@ const Contact = () => {
                       value={formData.subject}
                       onChange={handleChange}
                       className={`w-full bg-white/5 border ${errors.subject ? 'border-red-500' : 'border-white/10'} rounded-lg px-4 py-3 text-white`}
+                      required
                     >
                       <option value="" disabled>Select a subject</option>
                       <option value="Program Inquiry">Program Inquiry</option>
@@ -349,7 +350,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email Address</h3>
-                    <p className="text-white/70">contact@afsacademy.com</p>
+                    <p className="text-white/70">afstrainingacademy@gmail.com</p>
                   </div>
                 </div>
                 <div className="flex items-start">

@@ -3,6 +3,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+
 import { ThemeProvider } from "@/hooks/useTheme";
 import Index from "./pages/Index";
 import Programs from "./pages/Programs";
@@ -39,6 +40,7 @@ const App = () => (
           <ScrollToTop /> {/* Add the ScrollToTop component here */}
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/" element={<VideoHero />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/coaches" element={<Coaches />} />
             <Route path="/achievements" element={<Achievements />} />

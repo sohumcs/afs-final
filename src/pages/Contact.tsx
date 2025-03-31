@@ -129,7 +129,7 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-orange-500"
                       required
                     >
                       <option value="" disabled>Select a subject</option>
@@ -174,7 +174,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Our Location</h3>
-                    <p className="text-white/70">123 Basketball Avenue, Lucknow, Uttar Pradesh 226001</p>
+                    <p className="text-white/70">1st Floor Terrace Area Sky Line Plaza-1, Sushant Golf City, Behind Lulu Mall (Gate-5), Lucknow</p>
                   </div>
                 </div>
                 
@@ -184,7 +184,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Phone Number</h3>
-                    <p className="text-white/70">+91 12345 67890</p>
+                    <p className="text-white/70">7275546210</p>
                   </div>
                 </div>
                 
@@ -194,7 +194,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email Address</h3>
-                    <p className="text-white/70">contact@afsacademy.com</p>
+                    <p className="text-white/70">afstrainingacademy@gmail.com</p>
                   </div>
                 </div>
                 
@@ -209,37 +209,22 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-              
-              <div className="mt-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <button className="flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-4 transition-colors">
-                    <MessageSquare size={20} className="mr-2 text-afs-orange" />
-                    <span>Live Chat</span>
-                  </button>
-                  
-                  <button className="flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-4 transition-colors">
-                    <Calendar size={20} className="mr-2 text-afs-orange" />
-                    <span>Book Appointment</span>
-                  </button>
-                </div>
-              </div>
             </div>
           </div>
           
           {/* Map - Updated to Lucknow, India with wider view and adjusted zoom */}
-{/* Taller and wider map */}
-<div className="mt-16 rounded-xl overflow-hidden h-[500px] w-full"> {/* Changed height to 500px */}
-  <iframe 
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28464.9771274079!2d80.90972843476561!3d26.846687500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1711890000000!5m2!1sen!2sin"
-    width="100%"
-    height="100%"
-    style={{ border: 0 }}
-    allowFullScreen
-    loading="lazy"
-    referrerPolicy="no-referrer-when-downgrade"
-    title="AFS Academy Location - Lucknow"
-  ></iframe>
-</div>
+          <div className="mt-16 rounded-xl overflow-hidden h-[500px] w-full">
+            <iframe 
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28464.9771274079!2d80.90972843476561!3d26.846687500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1711890000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="AFS Academy Location - Lucknow"
+            ></iframe>
+          </div>
         </div>
       </div>
       

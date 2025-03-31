@@ -65,7 +65,7 @@ const Coaches = () => {
       bio: "Former WNBA star with expertise in fundamentals and skills training. Known for transforming average players into exceptional athletes.",
       experience: "12 years",
       specialties: ["Player Development", "Guard Skills", "Agility Training"],
-      image: "/media/no-image.jpg",
+      image: "/media/abhishek_bohra.jpg",
       achievements: ["WNBA All-Star (2006-2009)", "Olympic Gold Medalist"]
     },
     {
@@ -75,7 +75,7 @@ const Coaches = () => {
       bio: "Specialized in youth basketball with a focus on proper technique and fundamental skill building in a fun, engaging environment.",
       experience: "8 years",
       specialties: ["Youth Fundamentals", "Basketball IQ", "Team Dynamics"],
-      image: "/media/no-image.jpg",
+      image: "/media/AbhishekG.jpg",
       achievements: ["Youth Coach of the Year (2019)", "State Championship Coach (2018)"]
     },
     {
@@ -85,7 +85,7 @@ const Coaches = () => {
       bio: "Certified strength coach with background in sports science. Creates custom training programs to enhance athletic performance.",
       experience: "10 years",
       specialties: ["Strength Training", "Injury Prevention", "Athletic Performance"],
-      image: "/media/no-image.jpg",
+      image: "/media/AdnanK.jpg",
       achievements: ["Certified Strength & Conditioning Specialist", "Master's in Sports Science"]
     },
     {
@@ -95,7 +95,7 @@ const Coaches = () => {
       bio: "Former collegiate defensive player of the year with expertise in teaching lockdown defensive techniques and team defensive strategies.",
       experience: "9 years",
       specialties: ["Defensive Footwork", "Positioning", "Team Defense"],
-      image: "/media/no-image.jpg",
+      image: "/media/AmitC.jpg",
       achievements: ["Defensive Coach of the Year (2017)", "NCAA Final Four Coach"]
     },
     {
@@ -105,7 +105,7 @@ const Coaches = () => {
       bio: "Sports analytics expert who combines data analysis with practical basketball training to optimize player development.",
       experience: "7 years",
       specialties: ["Data Analysis", "Performance Metrics", "Skill Optimization"],
-      image: "/media/no-image.jpg",
+      image: "/media/Devesh.jpg",
       achievements: ["Sports Analytics Innovation Award", "Published Basketball Researcher"]
     },
     {
@@ -115,7 +115,7 @@ const Coaches = () => {
       bio: "Sports psychologist specializing in basketball mental performance, focus training, and competitive mindset development.",
       experience: "11 years",
       specialties: ["Mental Toughness", "Focus Training", "Game Preparation"],
-      image: "/media/no-image.jpg",
+      image: "/media/ShashwatS.jpg",
       achievements: ["Sports Psychology Certification", "Author of 'Mind of a Champion'"]
     },
     {
@@ -125,7 +125,7 @@ const Coaches = () => {
       bio: "Former streetball champion known for incredible ball handling skills, now teaching advanced dribbling and ball control techniques.",
       experience: "14 years",
       specialties: ["Advanced Dribbling", "Ball Control", "Creativity Development"],
-      image: "/media/no-image.jpg",
+      image: "/media/AdityaR.jpg",
       achievements: ["Streetball World Champion", "Global Basketball Camp Director"]
     },
     {

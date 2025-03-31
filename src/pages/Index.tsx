@@ -1,17 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../components/Navbar";
 import VideoHero from "../components/VideoHero";
 import Footer from "../components/Footer";
 import VideoSlideshow from "../components/VideoSlideshow";
-import { ArrowRight, ArrowDown, CircleDot, Award, Trophy, Star, TrendingUp, ChevronRight, Users, User, Clock } from "lucide-react";
+import { ArrowRight, ArrowDown, CircleDot, Award, Trophy, Star, TrendingUp, ChevronRight, Users, User, Clock, ArrowLeft } from "lucide-react";
 
 const Index = () => {
   // Stats data
   const stats = [
-    { value: "2,500+", label: "Players Trained", icon: <Users className="text-afs-orange" size={24} /> },
-    { value: "18", label: "Professional Coaches", icon: <User className="text-afs-orange" size={24} /> },
-    { value: "95%", label: "Success Rate", icon: <TrendingUp className="text-afs-orange" size={24} /> },
-    { value: "12", label: "Years Experience", icon: <Trophy className="text-afs-orange" size={24} /> },
+    { value: "1,500+", label: "Players Trained", icon: <Users className="text-afs-orange" size={24} /> },
+    { value: "14+", label: "Professional Coaches", icon: <User className="text-afs-orange" size={24} /> },
+    { value: "100%", label: "Success Rate", icon: <TrendingUp className="text-afs-orange" size={24} /> },
+    { value: "12+", label: "Years Experience", icon: <Trophy className="text-afs-orange" size={24} /> },
   ];
 
   // Program data
@@ -45,7 +45,7 @@ const Index = () => {
       name: "Ashwani Kumar Gupta",
       title: "Head Coach",
       bio: "A Senior National Player and certified fitness expert with extensive experience in sports and coaching. Passionate about training and mentoring athletes across multiple disciplines.",
-      image: "/media/no-image.jpg",
+      image: "/media/coach_photo.jpg",
       achievements: [
         "Senior National Player",
         "All India University, Khelo India Games Participant",
@@ -55,27 +55,23 @@ const Index = () => {
       ]
     },
     {
-      name: "Alicia Williams",
-      title: "Skills Development Coach",
-      bio: "Former WNBA All-Star with expertise in player development and ball handling techniques.",
-      image: "/media/no-image.jpg",
+      name: "Abhishek Singh Bohra",
+      title: "Senior Coach",
+      bio: "National Medalist Basketball Player & Skilled Coach at AFS Basketball Academy, dedicated to nurturing the next generation of champions.",
+      image: "/media/abhishek_bohra.jpg",
       achievements: [
-        "5x WNBA All-Star",
-        "Olympic Gold Medalist",
-        "Top Skills Trainer Award",
-        "Basketball Skills Academy Founder"
+        "National Medalist Player",
+        "B.P.Ed, M.P.Ed",
       ]
     },
     {
-      name: "David Chen",
-      title: "Performance Coach",
+      name: "Abhishek Gupta",
+      title: "Head Coach",
       bio: "Certified strength and conditioning specialist who focuses on basketball-specific athletic development.",
-      image: "/media/no-image.jpg",
+      image: "/media/abhishek_gupta.jpg",
       achievements: [
-        "Master's in Sports Science",
-        "Trained 30+ professional athletes",
-        "Published author on athletic performance",
-        "Developed revolutionary training program"
+        "National Player",
+        "B.P.Ed, M.P.Ed",
       ]
     }
   ];
@@ -168,62 +164,89 @@ const Index = () => {
               ))}
             </ul>
           </div>
-          <button className="btn-primary w-full text-sm flex items-center justify-center">
-            View Profile
-            <ChevronRight size={16} />
-          </button>
+          
         </div>
       </div>
     );
   };
   
-  // Testimonial Slider integrated directly
+  // Testimonial Slider Component
   const TestimonialSlider = () => {
-    // Testimonial data 
     const testimonials = [
       {
-        name: "Michael Thompson",
-        role: "College Player",
-        text: "AFS Academy transformed my game completely. The personalized training and attention to detail helped me secure a basketball scholarship to my dream college.",
-        image: "/media/no-image.jpg"
+        name: "Navya Singh",
+        role: "National Player",
+        text: "AFS Academy's elite training refined my skills and discipline, helping me represent UP and earn a shot at the Indian U-17 national team!",
+        image: "/media/navya.jpg"
       },
       {
         name: "Sarah Johnson",
-        role: "Professional Player",
+        role: "National Player",
         text: "Training with AFS Academy was the turning point in my career. Their elite coaching staff pushed me to levels I didn't think were possible.",
-        image: "/images/testimonial-2.jpg"
+        image: "/media/Shubham_singh.jpg"
       },
-      {
-        name: "Jason Williams",
-        role: "High School Player",
-        text: "The coaches at AFS Academy don't just teach basketball skills, they instill confidence and mental toughness that translates beyond the court.",
-        image: "/images/testimonial-3.jpg"
-      }
+      // {
+      //   name: "Jason Williams",
+      //   role: "High School Player",
+      //   text: "The coaches at AFS Academy don't just teach basketball skills, they instill confidence and mental toughness that translates beyond the court.",
+      //   image: "/images/testimonial-3.jpg"
+      // }
     ];
+
+    const [currentIndex, setCurrentIndex] = useState(0);
+
+    const nextTestimonial = () => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === testimonials.length - 1 ? 0 : prevIndex + 1
+      );
+    };
+
+    const prevTestimonial = () => {
+      setCurrentIndex((prevIndex) => 
+        prevIndex === 0 ? testimonials.length - 1 : prevIndex - 1
+      );
+    };
+
+    const goToTestimonial = (index) => {
+      setCurrentIndex(index);
+    };
 
     return (
       <div className="glass-card rounded-xl p-8">
         <div className="flex flex-col md:flex-row gap-6 items-center">
           <div className="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden flex-shrink-0 border-2 border-afs-orange">
             <img 
-              src={testimonials[0].image} 
-              alt={testimonials[0].name} 
+              src={testimonials[currentIndex].image} 
+              alt={testimonials[currentIndex].name} 
               className="w-full h-full object-cover"
             />
           </div>
-          <div>
-            <div className="mb-4 flex">
-              <CircleDot className="h-5 w-5 text-afs-orange mr-2" />
-              <CircleDot className="h-5 w-5 text-afs-orange mr-2" />
-              <CircleDot className="h-5 w-5 text-afs-orange" />
+          <div className="flex-grow">
+            <div className="mb-4 flex justify-center md:justify-start">
+              {testimonials.map((_, index) => (
+                <button 
+                  key={index}
+                  onClick={() => goToTestimonial(index)}
+                  className={`h-5 w-5 mr-2 ${index === currentIndex ? 'text-afs-orange' : 'text-white/30'}`}
+                >
+                  <CircleDot />
+                </button>
+              ))}
             </div>
-            <p className="text-white/80 text-lg mb-4 font-montserrat">{testimonials[0].text}</p>
+            <p className="text-white/80 text-lg mb-4 font-montserrat">
+              {testimonials[currentIndex].text}
+            </p>
             <div>
-              <h4 className="font-russo">{testimonials[0].name}</h4>
-              <p className="text-afs-orange text-sm font-montserrat">{testimonials[0].role}</p>
+              <h4 className="font-russo text-center md:text-left">
+                {testimonials[currentIndex].name}
+              </h4>
+              <p className="text-afs-orange text-sm font-montserrat text-center md:text-left">
+                {testimonials[currentIndex].role}
+              </p>
             </div>
           </div>
         </div>
+        
       </div>
     );
   };
@@ -454,7 +477,7 @@ const Index = () => {
                   </div>
                   <div>
                     <h5 className="font-russo mb-1">Location</h5>
-                    <p className="text-white/70 text-sm">123 Basketball Avenue, Sports City, SC 10001</p>
+                    <p className="text-white/70 text-sm">1st Floor Terrace Area Sky Line Plaza-1, Sushant Golf City, Behind Lulu Mall (Gate-5), Lucknow</p>
                   </div>
                 </div>
                 
@@ -466,7 +489,7 @@ const Index = () => {
                   </div>
                   <div>
                     <h5 className="font-russo mb-1">Email</h5>
-                    <p className="text-white/70 text-sm">contact@afsacademy.com</p>
+                    <p className="text-white/70 text-sm">afstrainingacademy@gmail.com</p>
                   </div>
                 </div>
                 
@@ -478,7 +501,7 @@ const Index = () => {
                   </div>
                   <div>
                     <h5 className="font-russo mb-1">Phone</h5>
-                    <p className="text-white/70 text-sm">(123) 456-7890</p>
+                    <p className="text-white/70 text-sm">7275546210</p>
                   </div>
                 </div>
               </div>

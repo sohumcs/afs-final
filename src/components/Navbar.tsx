@@ -27,7 +27,7 @@ const Navbar = () => {
     { name: "Programs", path: "/programs" },
     { name: "Coaches", path: "/coaches" },
     { name: "Achievements", path: "/achievements" },
-    { name: "Contact", path: "/contact" },
+    
   ];
 
   return (
@@ -40,17 +40,21 @@ const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex justify-between items-center">
-          <Link
-            to="/"
-            className="flex items-center"
-          >
-            <div className="text-afs-orange mr-2 w-7 h-7 flex items-center justify-center">
-              <div className="w-6 h-6 rounded-full bg-afs-orange animate-ball-bounce"></div>
-            </div>
-            <span className="text-2xl font-russo tracking-tight text-white">
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">AFS</span> Academy
-            </span>
-          </Link>
+        <Link
+  to="/"
+  className="flex items-center space-x-2"
+>
+  {/* Logo with rounded styling */}
+  <img 
+    src="/media/AFS Logo.png" 
+    alt="AFS Academy Logo"
+    className="h-8 w-8 sm:h-10 sm:w-10 rounded-full object-cover border-2 border-afs-orange/50"
+  />
+  
+  <span className="text-2xl font-russo tracking-tight text-white">
+    <span className="text-transparent bg-clip-text bg-gradient-to-r from-afs-orange to-afs-red">AFS</span> Academy
+  </span>
+</Link>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-8">
@@ -66,8 +70,8 @@ const Navbar = () => {
           </div>
 
           <div className="hidden md:flex items-center gap-4">
-            <Link to="/login" className="btn-primary">
-              Login
+            <Link to="/contact" className="btn-primary">
+              Contact
             </Link>
           </div>
 
@@ -99,11 +103,11 @@ const Navbar = () => {
               </Link>
             ))}
             <Link
-              to="/login"
+              to="/contact"
               className="btn-primary text-center"
               onClick={() => setIsOpen(false)}
             >
-              Login
+              Contact
             </Link>
           </div>
         </div>

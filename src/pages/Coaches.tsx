@@ -7,7 +7,7 @@ import { Trophy, Award, Star, Users, ChevronDown, ChevronUp } from "lucide-react
 
 const Coaches = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [showAllCoaches, setShowAllCoaches] = useState(false);
+  const [showAllCoaches, setShowAllCoaches] = useState(false);  
   
   useEffect(() => {
     // Make elements visible immediately on component mount
@@ -46,122 +46,146 @@ const Coaches = () => {
   const coaches = [
     {
       id: 1,
-      name: "Michael Thompson",
+      name: "Ashwani Kumar Gupta",
       role: "Head Coach",
-      bio: "Former NBA player with 15 years of coaching experience. Specializes in offensive strategy and shooting techniques.",
+      bio: "A Senior National Player and certified fitness expert with extensive experience in sports and coaching. Passionate about training and mentoring athletes across multiple disciplines.",
       experience: "15+ years",
       specialties: ["Offensive Strategy", "Shooting Techniques", "Team Building"],
-      image: "/images/coach-michael.jpg",
-      achievements: ["NBA Champion (2003)", "NCAA Coach of the Year (2010)"]
+      image: "/media/coach_photo.jpg",
+      achievements: ["Senior National Player",
+        "All India University, Khelo India Games Participant",
+        "Certified Basketball Coach (NSNIS Bangalore)  ",
+        "Certified Personal and Fitness Trainer",
+        "B.P.Ed, M.P.Ed"]
     },
     {
       id: 2,
-      name: "Sarah Wilson",
+      name: "Abhishek Singh Bohra",
       role: "Skills Development Coach",
       bio: "Former WNBA star with expertise in fundamentals and skills training. Known for transforming average players into exceptional athletes.",
       experience: "12 years",
       specialties: ["Player Development", "Guard Skills", "Agility Training"],
-      image: "/images/coach-sarah.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["WNBA All-Star (2006-2009)", "Olympic Gold Medalist"]
     },
     {
       id: 3,
-      name: "David Chen",
+      name: "Abhishek Gupta",
       role: "Youth Development Coach",
       bio: "Specialized in youth basketball with a focus on proper technique and fundamental skill building in a fun, engaging environment.",
       experience: "8 years",
       specialties: ["Youth Fundamentals", "Basketball IQ", "Team Dynamics"],
-      image: "/images/coach-david.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Youth Coach of the Year (2019)", "State Championship Coach (2018)"]
     },
     {
       id: 4,
-      name: "Marcus Johnson",
+      name: "Adnan Khan",
       role: "Strength & Conditioning",
       bio: "Certified strength coach with background in sports science. Creates custom training programs to enhance athletic performance.",
       experience: "10 years",
       specialties: ["Strength Training", "Injury Prevention", "Athletic Performance"],
-      image: "/images/coach-marcus.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Certified Strength & Conditioning Specialist", "Master's in Sports Science"]
     },
     {
       id: 5,
-      name: "Jennifer Lopez",
+      name: "Amit Chaudhary",
       role: "Defense Specialist",
       bio: "Former collegiate defensive player of the year with expertise in teaching lockdown defensive techniques and team defensive strategies.",
       experience: "9 years",
       specialties: ["Defensive Footwork", "Positioning", "Team Defense"],
-      image: "/images/coach-jen.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Defensive Coach of the Year (2017)", "NCAA Final Four Coach"]
     },
     {
       id: 6,
-      name: "Robert Williams",
+      name: "Devesh",
       role: "Performance Analytics",
       bio: "Sports analytics expert who combines data analysis with practical basketball training to optimize player development.",
       experience: "7 years",
       specialties: ["Data Analysis", "Performance Metrics", "Skill Optimization"],
-      image: "/images/coach-robert.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Sports Analytics Innovation Award", "Published Basketball Researcher"]
     },
     {
       id: 7,
-      name: "Maria Rodriguez",
+      name: "Shashwat",
       role: "Mental Performance Coach",
       bio: "Sports psychologist specializing in basketball mental performance, focus training, and competitive mindset development.",
       experience: "11 years",
       specialties: ["Mental Toughness", "Focus Training", "Game Preparation"],
-      image: "/images/coach-maria.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Sports Psychology Certification", "Author of 'Mind of a Champion'"]
     },
     {
       id: 8,
-      name: "James Wilson",
+      name: "Aditya Raj",
       role: "Ball Handling Specialist",
       bio: "Former streetball champion known for incredible ball handling skills, now teaching advanced dribbling and ball control techniques.",
       experience: "14 years",
       specialties: ["Advanced Dribbling", "Ball Control", "Creativity Development"],
-      image: "/images/coach-james.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Streetball World Champion", "Global Basketball Camp Director"]
     },
     {
       id: 9,
-      name: "Kimberly Taylor",
+      name: "Praveen",
       role: "Transition Game Coach",
       bio: "Expert in fast break offense and transition defense with experience coaching at the professional level overseas.",
       experience: "13 years",
       specialties: ["Fast Break Offense", "Transition Defense", "Tempo Control"],
-      image: "/images/coach-kim.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["European Championship Assistant Coach", "Fast Break Strategy Innovator"]
     },
     {
       id: 10,
-      name: "Thomas Jackson",
+      name: "Shubham Singh",
       role: "Post Play Development",
       bio: "Former professional center who specializes in teaching post moves, footwork, and inside scoring techniques.",
       experience: "16 years",
       specialties: ["Post Moves", "Footwork", "Inside Scoring"],
-      image: "/images/coach-thomas.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["All-Star Center (2005-2008)", "Post Play Development Specialist"]
     },
     {
       id: 11,
-      name: "Lisa Brown",
+      name: "Uttam Tewari",
       role: "Shooting Coach",
       bio: "Three-point specialist with a perfect shooting form, now teaching advanced shooting mechanics and consistency training.",
       experience: "10 years",
       specialties: ["Shooting Form", "Three-Point Shooting", "Free Throws"],
-      image: "/images/coach-lisa.jpg",
+      image: "/media/no-image.jpg",
       achievements: ["Shooting Percentage Record Holder", "Shooting Clinic Director"]
     },
     {
       id: 12,
-      name: "Carlos Mendez",
+      name: "Vikas Pal",
       role: "International Skills Coach",
       bio: "Brings global basketball perspective having played professionally in Europe, Asia and South America, specializing in international style of play.",
       experience: "12 years",
       specialties: ["International Tactics", "Global Playing Styles", "Versatility Training"],
-      image: "/images/coach-carlos.jpg",
+      image: "/media/no-image.jpg",
+      achievements: ["International Champions Coach", "Global Basketball Ambassador"]
+    },
+    {
+      id: 13,
+      name: "Yash Thapa",
+      role: "International Skills Coach",
+      bio: "Brings global basketball perspective having played professionally in Europe, Asia and South America, specializing in international style of play.",
+      experience: "12 years",
+      specialties: ["International Tactics", "Global Playing Styles", "Versatility Training"],
+      image: "/media/no-image.jpg",
+      achievements: ["International Champions Coach", "Global Basketball Ambassador"]
+    },
+    {
+      id: 14,
+      name: "Vivek Yadav",
+      role: "International Skills Coach",
+      bio: "Brings global basketball perspective having played professionally in Europe, Asia and South America, specializing in international style of play.",
+      experience: "12 years",
+      specialties: ["International Tactics", "Global Playing Styles", "Versatility Training"],
+      image: "/media/no-image.jpg",
       achievements: ["International Champions Coach", "Global Basketball Ambassador"]
     }
   ];

@@ -13,26 +13,26 @@ const videoData = [
   {
     id: 1,
     src: "/media/basketball.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
-    title: "Training Session 1"
+    poster: "/media/coaches_cover.jpg",
+   
   },
   {
     id: 2,
     src: "/media/basketballssss_2.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png", 
-    title: "Training Session 2"
+    poster: "/media/coaches_cover.jpg",
+   
   },
   {
     id: 3,
     src: "/media/basketballssss_p3.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
-    title: "Training Session 3"
+    poster: "/media/coaches_cover.jpg",
+
   },
   {
     id: 4,
     src: "/media/basketballssss.mp4",
-    poster: "/lovable-uploads/c7ba31d7-f07b-47e7-a561-2af118767e67.png",
-    title: "Training Session 4"
+    poster: "/media/coaches_cover.jpg",
+    
   }
 ];
 

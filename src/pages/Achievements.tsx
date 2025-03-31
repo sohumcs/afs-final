@@ -20,99 +20,68 @@ const Achievements = () => {
     {
       id: 1,
       year: 2023,
-      title: "National Youth Championship",
-      description: "Our U-16 team won the National Youth Championship with an undefeated season.",
-      image: "/images/achievement-1.jpg",
-      category: "Team Championship"
+      title: "AFS Basketball League",
+      description: "We proudly organized the biggest basketball league in Lucknow, bringing together 110 teams from all over Uttar Pradesh. The league featured many national and international players, making it a grand success. This is just the beginning—many more milestones to come! ",
+      image: "/media/afs_league.jpg",
+      category: "Championship"
     },
     {
       id: 2,
       year: 2022,
-      title: "Division 1 College Placements",
-      description: "15 of our graduates received Division 1 college basketball scholarships this year.",
-      image: "/images/achievement-2.jpg",
+      title: "Competitive Exposure for Our Players!",
+      description: "We regularly organize district-level and inter-academy tournaments, providing our players with valuable game experience and competition exposure. These events help in skill development and prepare them for higher-level championships.",
+      image: "/media/district_level.jpg",
       category: "Player Development"
     },
     {
       id: 3,
       year: 2022,
-      title: "Coach of the Year Award",
-      description: "Head Coach Michael Thompson received the Regional Coach of the Year award.",
-      image: "/images/achievement-3.jpg",
-      category: "Coaching Excellence"
+      title: "Proud Sponsors of Senior State Championship 2024",
+      description: "We are honored to have sponsored official T-shirts for the Senior State Basketball Championship 2024 held in Kanpur. Contributing to the growth of basketball in Uttar Pradesh is a proud achievement for us.",
+      image: "/media/sponsers1.jpg",
+      category: "Sponserships"
     },
     {
       id: 4,
       year: 2021,
-      title: "State Tournament Finals",
-      description: "Our U-18 team reached the State Tournament Finals, showcasing exceptional skill and teamwork.",
-      image: "/images/achievement-4.jpg",
-      category: "Team Achievement"
+      title: "Decathlon as Our Sports Partner",
+      description: "We are proud to have *Decathlon* as our official *sports partner*, providing high-quality equipment and support to enhance the training experience for our players. Together, we are taking the game to the next level!",
+      image: "/media/decathalon.jpg",
+      category: "Sponserships"
     },
     {
       id: 5,
       year: 2021,
-      title: "NBA Draft Selection",
-      description: "Former AFS Academy player Marcus Wilson was selected in the first round of the NBA Draft.",
-      image: "/images/achievement-5.jpg",
+      title: "Rising Stars of AFS Academy",
+      description: "We are proud to announce that 15-20 players from our academy are representing state and national championships. Their hard work and dedication are taking them to new heights in the basketball world!",
+      image: "/media/alumni.jpg",
       category: "Alumni Success"
     },
     {
       id: 6,
       year: 2020,
-      title: "Summer League Champions",
-      description: "Our elite team dominated the Regional Summer League, winning the championship title.",
-      image: "/images/achievement-6.jpg",
-      category: "Team Championship"
+      title: "Navya Singh's Journey!",
+      description: "Navya Singh has been consistently representing the *U.P. team* and even secured a spot in the *Under-17 Indian team tryouts*. A true inspiration for all young athletes!",
+      image: "/media/navya_02.jpg",
+      category: "Alumni Success"
     },
     {
       id: 7,
       year: 2020,
-      title: "All-Star Selections",
-      description: "8 AFS Academy players were selected for the Regional All-Star Game.",
-      image: "/images/achievement-7.jpg",
-      category: "Player Recognition"
+      title: "Winners's Indian National Basketball League",
+      description: "AFS Academy team took 1st place in the Indian National Basketball League",
+      image: "/media/inbl.jpg",
+      category: "Competition"
     },
     {
       id: 8,
       year: 2019,
-      title: "International Tournament Bronze",
-      description: "AFS Academy team took 3rd place in the International Youth Basketball Tournament.",
-      image: "/images/achievement-8.jpg",
-      category: "International Competition"
+      title: "Head Coach Lucknow Team",
+      description: "The head coach of the Lucknow team from 2021 up to the present day.",
+      image: "/media/lucknow_team.jpg",
+      category: "Mentorship"
     },
-    {
-      id: 9,
-      year: 2019,
-      title: "Training Facility Expansion",
-      description: "Opened our new state-of-the-art 25,000 sq ft training facility with 4 full courts.",
-      image: "/images/achievement-9.jpg",
-      category: "Academy Growth"
-    },
-    {
-      id: 10,
-      year: 2018,
-      title: "Coaching Staff Recognition",
-      description: "AFS Academy recognized as having the top youth coaching staff in the state.",
-      image: "/images/achievement-10.jpg",
-      category: "Coaching Excellence"
-    },
-    {
-      id: 11,
-      year: 2018,
-      title: "Scholarship Program Launch",
-      description: "Launched our scholarship program providing training opportunities to underprivileged youth.",
-      image: "/images/achievement-11.jpg",
-      category: "Community Impact"
-    },
-    {
-      id: 12,
-      year: 2017,
-      title: "Academy Foundation",
-      description: "AFS Academy was founded with a mission to develop elite basketball players through expert coaching.",
-      image: "/images/achievement-12.jpg",
-      category: "Milestone"
-    }
+    
   ];
   
   // Pagination logic
@@ -169,9 +138,7 @@ const Achievements = () => {
                     alt={achievement.title} 
                     className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" 
                   />
-                  <div className="absolute top-3 left-3 py-1 px-3 rounded-full bg-afs-dark/80 backdrop-blur-sm text-white text-xs font-medium">
-                    {achievement.year}
-                  </div>
+                  
                   <div className="absolute top-3 right-3 p-2 rounded-full bg-afs-dark/80 backdrop-blur-sm">
                     {getCategoryIcon(achievement.category)}
                   </div>

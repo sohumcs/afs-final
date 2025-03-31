@@ -46,10 +46,11 @@ const VideoHero = () => {
             <span className="mx-2"> Basketball Academy</span>
           </div>
         </h1>
-        <p className="max-w-2xl mb-8 text-lg font-montserrat">
+        <p className="max-w-3xl mb-8 text-lg font-montserrat">
+          Biggest Basketball Club in Lucknow.
+          <br />
           Elevate your game with professional basketball training
-          designed to unlock your full potential on the court.<br/><br/>
-          Largest Basketball Training Academy in Lucknow.
+          designed to unlock your full potential on the court.
         </p>
         
         <div className="space-x-4 flex flex-wrap justify-center gap-4">
@@ -67,12 +68,12 @@ const VideoHero = () => {
         <div className="flex flex-wrap justify-center gap-6 mt-12 w-full max-w-4xl">
           <div className="glass-card py-3 px-6 rounded-lg flex items-center">
             <TrendingUp className="text-afs-orange mr-2" size={20} />
-            <span className="font-russo"></span>
-            <span className="ml-2 text-white/70 text-sm">Success Rate</span>
+            <span className="font-russo">14</span>
+            <span className="ml-2 text-white/70 text-sm">Locations</span>
           </div>
           <div className="glass-card py-3 px-6 rounded-lg flex items-center">
             <Award className="text-afs-orange mr-2" size={20} />
-            <span className="font-russo">14+</span>
+            <span className="font-russo">15</span>
             <span className="ml-2 text-white/70 text-sm">Pro Coaches</span>
           </div>
           <div className="glass-card py-3 px-6 rounded-lg flex items-center">

@@ -9,9 +9,9 @@ const Index = () => {
   // Stats data
   const stats = [
     { value: "1,500+", label: "Players Trained", icon: <Users className="text-afs-orange" size={24} /> },
-    { value: "12", label: "Professional Coaches", icon: <User className="text-afs-orange" size={24} /> },
+    { value: "14+", label: "Professional Coaches", icon: <User className="text-afs-orange" size={24} /> },
     { value: "100%", label: "Success Rate", icon: <TrendingUp className="text-afs-orange" size={24} /> },
-    { value: "12", label: "Years Experience", icon: <Trophy className="text-afs-orange" size={24} /> },
+    { value: "12+", label: "Years Experience", icon: <Trophy className="text-afs-orange" size={24} /> },
   ];
 
   // Program data
@@ -56,19 +56,19 @@ const Index = () => {
     },
     {
       name: "Abhishek Singh Bohra",
-      title: "Skills Development Coach",
-      bio: "Former WNBA All-Star with expertise in player development and ball handling techniques.",
-      image: "/media/no-image.jpg",
+      title: "Senior Coach",
+      bio: "National Medalist Basketball Player & Skilled Coach at AFS Basketball Academy, dedicated to nurturing the next generation of champions.",
+      image: "/media/abhishek_bohra.jpg",
       achievements: [
-        "National Player",
+        "National Medalist Player",
         "B.P.Ed, M.P.Ed",
       ]
     },
     {
       name: "Abhishek Gupta",
-      title: "Performance Coach",
+      title: "Head Coach",
       bio: "Certified strength and conditioning specialist who focuses on basketball-specific athletic development.",
-      image: "/media/no-image.jpg",
+      image: "/media/abhishek_gupta.jpg",
       achievements: [
         "National Player",
         "B.P.Ed, M.P.Ed",
@@ -164,10 +164,7 @@ const Index = () => {
               ))}
             </ul>
           </div>
-          <button className="btn-primary w-full text-sm flex items-center justify-center">
-            View Profile
-            <ChevronRight size={16} />
-          </button>
+          
         </div>
       </div>
     );
@@ -177,23 +174,23 @@ const Index = () => {
   const TestimonialSlider = () => {
     const testimonials = [
       {
-        name: "Navya Singh Suryavanshi",
+        name: "Navya Singh",
         role: "National Player",
-        text: "AFS Academy transformed my game completely. The personalized training and attention to detail helped me secure a basketball scholarship to my dream college.",
-        image: "/media/no-image.jpg"
+        text: "AFS Academy's elite training refined my skills and discipline, helping me represent UP and earn a shot at the Indian U-17 national team!",
+        image: "/media/navya.jpg"
       },
       {
         name: "Sarah Johnson",
-        role: "Professional Player",
+        role: "National Player",
         text: "Training with AFS Academy was the turning point in my career. Their elite coaching staff pushed me to levels I didn't think were possible.",
-        image: "/images/testimonial-2.jpg"
+        image: "/media/Shubham_singh.jpg"
       },
-      {
-        name: "Jason Williams",
-        role: "High School Player",
-        text: "The coaches at AFS Academy don't just teach basketball skills, they instill confidence and mental toughness that translates beyond the court.",
-        image: "/images/testimonial-3.jpg"
-      }
+      // {
+      //   name: "Jason Williams",
+      //   role: "High School Player",
+      //   text: "The coaches at AFS Academy don't just teach basketball skills, they instill confidence and mental toughness that translates beyond the court.",
+      //   image: "/images/testimonial-3.jpg"
+      // }
     ];
 
     const [currentIndex, setCurrentIndex] = useState(0);
@@ -250,21 +247,6 @@ const Index = () => {
           </div>
         </div>
         
-        {/* Navigation Arrows */}
-        <div className="flex justify-between mt-6">
-          <button 
-            onClick={prevTestimonial}
-            className="text-white/70 hover:text-afs-orange transition-colors"
-          >
-            <ArrowLeft size={24} />
-          </button>
-          <button 
-            onClick={nextTestimonial}
-            className="text-white/70 hover:text-afs-orange transition-colors"
-          >
-            <ArrowRight size={24} />
-          </button>
-        </div>
       </div>
     );
   };

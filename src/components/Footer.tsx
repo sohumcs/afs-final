@@ -68,15 +68,15 @@ const Footer = () => {
             <ul className="space-y-2 text-white/70">
               <li className="flex items-start">
                 <span className="text-afs-orange mr-2">•</span>
-                <span>123 Basketball Avenue, Sports City, SC 10001</span>
+                <span>1st Floor Terrace Area Sky Line Plaza-1, Sushant Golf City, Behind Lulu Mall (Gate-5), Lucknow</span>
               </li>
               <li className="flex items-start">
                 <span className="text-afs-orange mr-2">•</span>
-                <span>contact@afsacademy.com</span>
+                <span>afstrainingacademy@gmail.com</span>
               </li>
               <li className="flex items-start">
                 <span className="text-afs-orange mr-2">•</span>
-                <span>(123) 456-7890</span>
+                <span>7275546210</span>
               </li>
               <li className="flex items-start">
                 <span className="text-afs-orange mr-2">•</span>

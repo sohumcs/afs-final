@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
@@ -175,7 +174,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Our Location</h3>
-                    <p className="text-white/70">123 Basketball Avenue, Sports City, SC 10001</p>
+                    <p className="text-white/70">123 Basketball Avenue, Lucknow, Uttar Pradesh 226001</p>
                   </div>
                 </div>
                 
@@ -185,7 +184,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Phone Number</h3>
-                    <p className="text-white/70">(123) 456-7890</p>
+                    <p className="text-white/70">+91 12345 67890</p>
                   </div>
                 </div>
                 
@@ -227,19 +226,20 @@ const Contact = () => {
             </div>
           </div>
           
-          {/* Map */}
-          <div className="mt-16 rounded-xl overflow-hidden h-[400px]">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.215252779276!2d-73.98823492396909!3d40.757978834641066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855a96da09d%3A0x86cbc1af16d327b9!2sMadison%20Square%20Garden!5e0!3m2!1sen!2sus!4v1695926195717!5m2!1sen!2sus" 
-              width="100%" 
-              height="100%" 
-              style={{ border: 0 }} 
-              allowFullScreen 
-              loading="lazy" 
-              referrerPolicy="no-referrer-when-downgrade"
-              title="AFS Academy Location"
-            ></iframe>
-          </div>
+          {/* Map - Updated to Lucknow, India with wider view and adjusted zoom */}
+{/* Taller and wider map */}
+<div className="mt-16 rounded-xl overflow-hidden h-[500px] w-full"> {/* Changed height to 500px */}
+  <iframe 
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28464.9771274079!2d80.90972843476561!3d26.846687500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1711890000000!5m2!1sen!2sin"
+    width="100%"
+    height="100%"
+    style={{ border: 0 }}
+    allowFullScreen
+    loading="lazy"
+    referrerPolicy="no-referrer-when-downgrade"
+    title="AFS Academy Location - Lucknow"
+  ></iframe>
+</div>
         </div>
       </div>
       

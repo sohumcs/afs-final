@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { 
@@ -12,8 +12,18 @@ import {
 } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
+interface Location {
+  position: {
+    lat: number;
+    lng: number;
+  };
+  title: string;
+  address: string;
+}
+
 const Contact = () => {
   const { toast } = useToast();
+  const [mapLoaded, setMapLoaded] = useState(false);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -21,7 +31,123 @@ const Contact = () => {
     subject: "",
     message: ""
   });
-  
+
+  // All AFS Academy locations in Lucknow
+  const locations: Location[] = [
+    {
+      position: { lat: 26.9003, lng: 80.9847 },
+      title: "AFS Basketball Training Academy",
+      address: "Loyola International School, Mahanagar, Lucknow"
+    },
+    {
+      position: { lat: 26.8543, lng: 81.0078 },
+      title: "AFS Training Academy - Parsvnath Planet",
+      address: "Parsvnath Planet, Lucknow"
+    },
+    {
+      position: { lat: 26.8556, lng: 81.0102 },
+      title: "AFS Training Academy - Eldeco Elegance",
+      address: "Eldeco Elegance, Gomti Nagar, Lucknow"
+    },
+    {
+      position: { lat: 26.8386, lng: 80.9973 },
+      title: "AFS Basketball Academy - Behind Lulu Mall",
+      address: "Behind Lulu Mall, Lucknow"
+    },
+    {
+      position: { lat: 26.7829, lng: 80.9876 },
+      title: "AFS Basketball Academy - Skyline Plaza",
+      address: "1st Floor Terrace Area, Skyline Plaza 1, Sushant Golf City"
+    },
+    {
+      position: { lat: 26.8621, lng: 81.0254 },
+      title: "AFS Basketball Academy - Jeewan Sunshine School",
+      address: "Jeewan Sunshine School, Gomti Nagar Extension"
+    },
+    {
+      position: { lat: 26.8575, lng: 81.0108 },
+      title: "Shalimar One World Vista",
+      address: "Viraj Khand, Gomti Nagar, Lucknow"
+    },
+    {
+      position: { lat: 26.8468, lng: 81.0026 },
+      title: "MI Rustle Court",
+      address: "Near Sahara Hospital, Gomti Nagar, Lucknow"
+    }
+  ];
+
+  // Load Google Maps script
+  useEffect(() => {
+    if (mapLoaded) return;
+
+    const existingScript = document.querySelector(
+      `script[src^="https://maps.googleapis.com/maps/api/js"]`
+    );
+
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${import.meta.env.VITE_GOOGLE_MAPS_API_KEY}&libraries=places`;
+      script.async = true;
+      script.onload = () => setMapLoaded(true);
+      document.head.appendChild(script);
+    } else if (window.google) {
+      setMapLoaded(true);
+    }
+
+    return () => {
+      const scripts = document.querySelectorAll(
+        `script[src^="https://maps.googleapis.com/maps/api/js"]`
+      );
+      scripts.forEach(script => document.head.removeChild(script));
+    };
+  }, [mapLoaded]);
+
+  // Initialize map when script is loaded
+  useEffect(() => {
+    if (!mapLoaded) return;
+
+    const initMap = () => {
+      const map = new window.google.maps.Map(document.getElementById("map"), {
+        center: { lat: 26.8467, lng: 80.9462 }, // Lucknow center
+        zoom: 12,
+        styles: [
+          {
+            featureType: "poi",
+            stylers: [{ visibility: "off" }] // Hide points of interest
+          }
+        ]
+      });
+
+      // Add markers for each location
+      locations.forEach((location) => {
+        const marker = new window.google.maps.Marker({
+          position: location.position,
+          map,
+          title: location.title,
+          icon: {
+            url: "http://maps.google.com/mapfiles/ms/icons/red-dot.png",
+          }
+        });
+
+        // Add info window for each marker
+        const infoWindow = new window.google.maps.InfoWindow({
+          content: `
+            <div style="color: black; padding: 8px;">
+              <h3 style="margin: 0 0 6px 0; font-size: 16px; font-weight: bold;">${location.title}</h3>
+              <p style="margin: 0; font-size: 14px;">${location.address}</p>
+            </div>
+          `
+        });
+
+        marker.addListener("click", () => {
+          infoWindow.open(map, marker);
+        });
+      });
+    };
+
+    initMap();
+  }, [mapLoaded]);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -34,13 +160,11 @@ const Contact = () => {
     e.preventDefault();
     console.log("Form submitted:", formData);
     
-    // Show success toast
     toast({
       title: "Message sent!",
       description: "We'll get back to you as soon as possible.",
     });
     
-    // Reset form
     setFormData({
       name: "",
       email: "",
@@ -173,8 +297,18 @@ const Contact = () => {
                     <MapPin className="text-afs-orange" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Our Location</h3>
-                    <p className="text-white/70">1st Floor Terrace Area Sky Line Plaza-1, Sushant Golf City, Behind Lulu Mall (Gate-5), Lucknow</p>
+                    <h3 className="font-semibold text-lg">Our Locations</h3>
+                    <div className="text-white/70 space-y-3 mt-2">
+                      {locations.map((location, index) => (
+                        <div key={index} className="flex items-start">
+                          <div className="w-2 h-2 rounded-full bg-afs-orange mt-2 mr-2"></div>
+                          <div>
+                            <p className="font-medium">{location.title}</p>
+                            <p className="text-sm">{location.address}</p>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
                 
@@ -184,7 +318,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Phone Number</h3>
-                    <p className="text-white/70">7275546210</p>
+                    <p className="text-white/70">+91 72755 46210</p>
                   </div>
                 </div>
                 
@@ -212,18 +346,9 @@ const Contact = () => {
             </div>
           </div>
           
-          {/* Map - Updated to Lucknow, India with wider view and adjusted zoom */}
-          <div className="mt-16 rounded-xl overflow-hidden h-[500px] w-full">
-            <iframe 
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28464.9771274079!2d80.90972843476561!3d26.846687500000004!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x399bfd991f32b16b%3A0x93ccba8909978be7!2sLucknow%2C%20Uttar%20Pradesh!5e0!3m2!1sen!2sin!4v1711890000000!5m2!1sen!2sin"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-              title="AFS Academy Location - Lucknow"
-            ></iframe>
+          {/* Interactive Map Container */}
+          <div className="mt-16 rounded-xl overflow-hidden h-[600px] w-full bg-gray-800/50 border border-white/10">
+            <div id="map" className="w-full h-full"></div>
           </div>
         </div>
       </div>

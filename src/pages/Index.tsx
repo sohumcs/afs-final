@@ -180,7 +180,7 @@ const Index = () => {
         image: "/media/navya.jpg"
       },
       {
-        name: "Sarah Johnson",
+        name: "Shubham Singh",
         role: "National Player",
         text: "Training with AFS Academy was the turning point in my career. Their elite coaching staff pushed me to levels I didn't think were possible.",
         image: "/media/Shubham_singh.jpg"

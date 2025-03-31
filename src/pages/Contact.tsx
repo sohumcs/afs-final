@@ -130,7 +130,7 @@ const Contact = () => {
                       name="subject"
                       value={formData.subject}
                       onChange={handleChange}
-                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-white"
+                      className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-orange-500"
                       required
                     >
                       <option value="" disabled>Select a subject</option>
@@ -175,7 +175,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Our Location</h3>
-                    <p className="text-white/70">123 Basketball Avenue, Sports City, SC 10001</p>
+                    <p className="text-white/70">1st Floor Terrace Area Sky Line Plaza-1, Sushant Golf City, Behind Lulu Mall (Gate-5), Lucknow</p>
                   </div>
                 </div>
                 
@@ -185,7 +185,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Phone Number</h3>
-                    <p className="text-white/70">(123) 456-7890</p>
+                    <p className="text-white/70">7275546210</p>
                   </div>
                 </div>
                 
@@ -195,7 +195,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-semibold text-lg">Email Address</h3>
-                    <p className="text-white/70">contact@afsacademy.com</p>
+                    <p className="text-white/70">afstrainingacademy@gmail.com</p>
                   </div>
                 </div>
                 
@@ -211,19 +211,7 @@ const Contact = () => {
                 </div>
               </div>
               
-              <div className="mt-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                  <button className="flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-4 transition-colors">
-                    <MessageSquare size={20} className="mr-2 text-afs-orange" />
-                    <span>Live Chat</span>
-                  </button>
-                  
-                  <button className="flex items-center justify-center bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg p-4 transition-colors">
-                    <Calendar size={20} className="mr-2 text-afs-orange" />
-                    <span>Book Appointment</span>
-                  </button>
-                </div>
-              </div>
+              
             </div>
           </div>
           

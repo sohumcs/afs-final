@@ -2,13 +2,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-<<<<<<< HEAD
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import VideoHero from './components/VideoHero';
-=======
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-
->>>>>>> 001639c0a2f9fa1b0cdce78ab34532177d9602f6
 import { ThemeProvider } from "@/hooks/useTheme";
 import Index from "./pages/Index";
 import Programs from "./pages/Programs";

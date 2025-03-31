@@ -7,7 +7,7 @@ import { Trophy, Award, Star, Users, ChevronDown, ChevronUp } from "lucide-react
 
 const Coaches = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [showAllCoaches, setShowAllCoaches] = useState(false);
+  const [showAllCoaches, setShowAllCoaches] = useState(false);  
   
   useEffect(() => {
     // Make elements visible immediately on component mount

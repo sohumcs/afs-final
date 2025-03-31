@@ -1,5 +1,5 @@
-
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { ArrowDown, CircleDot, Award, TrendingUp } from 'lucide-react';
 
 const VideoHero = () => {
@@ -47,21 +47,21 @@ const VideoHero = () => {
           </div>
         </h1>
         <p className="max-w-3xl mb-8 text-lg font-montserrat">
-          Biggest Basketball Club in Lucknow.
+          Largest Basketball academy in Lucknow.
           <br />
           Elevate your game with professional basketball training
           designed to unlock your full potential on the court.
         </p>
         
         <div className="space-x-4 flex flex-wrap justify-center gap-4">
-          <button className="btn-primary flex items-center">
+          <Link to="/programs" className="btn-primary flex items-center">
             <CircleDot className="mr-2" size={20} />
             Explore Programs
-          </button>
-          <button className="btn-secondary flex items-center">
+          </Link>
+          <Link to="/coaches" className="btn-secondary flex items-center">
             <Award className="mr-2" size={20} />
             Meet Our Coaches
-          </button>
+          </Link>
         </div>
         
         {/* Basketball Stats Quick View */}
@@ -81,7 +81,6 @@ const VideoHero = () => {
             <span className="font-russo">1,500+</span>
             <span className="ml-2 text-white/70 text-sm">Players Trained</span>
           </div>
-          
         </div>
       </div>
       

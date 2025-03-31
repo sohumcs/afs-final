@@ -4,6 +4,7 @@ import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import VideoHero from './components/VideoHero';
 import { ThemeProvider } from "@/hooks/useTheme";
 import Index from "./pages/Index";
 import Programs from "./pages/Programs";
@@ -24,6 +25,7 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
+            <Route path="/" element={<VideoHero />} />
             <Route path="/programs" element={<Programs />} />
             <Route path="/coaches" element={<Coaches />} />
             <Route path="/achievements" element={<Achievements />} />
